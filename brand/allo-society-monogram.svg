@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140">
+  <defs></defs>
+  <rect width="120" height="140" fill="#0A0A0C"></rect>
+  <text x="60" y="68" font-family="'Cormorant',serif" font-size="60" font-weight="300" font-style="italic" fill="#F5F2EB" text-anchor="middle">A</text>
+  <line x1="36" y1="84" x2="84" y2="84" stroke="#F5F2EB" stroke-width="0.8" opacity="0.5"></line>
+  <text x="60" y="118" font-family="'Cormorant',serif" font-size="36" font-weight="300" fill="#F5F2EB" text-anchor="middle" style="letter-spacing:0.18em">S</text>
+</svg>
