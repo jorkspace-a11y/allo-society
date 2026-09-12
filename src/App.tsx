@@ -117,7 +117,7 @@ function Process() {
   return <section className="process-section" id="process">
     <div className="section-head light"><p className="kicker">04 / HOW IT MOVES</p><p>Clear enough to follow. Careful enough to work.</p></div>
     <ol className="process-list">{steps.map((step, index) => <li key={step}><span>0{index + 1}</span><strong>{step}</strong><i>{index === steps.length - 1 ? '●' : '↓'}</i></li>)}</ol>
-    <p className="process-foot">INDONESIA <span>→</span> GLOBAL TALENT <span>→</span> YOUR TEAM</p>
+    <p className="process-foot">BALI <span>→</span> GLOBAL TALENT <span>→</span> YOUR TEAM</p>
   </section>
 }
 
