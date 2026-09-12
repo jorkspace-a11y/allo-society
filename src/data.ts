@@ -1,12 +1,6 @@
-export const services = [
-  { id: '01', name: 'Assistant', line: 'Reliable support for the work that keeps everything moving.', tags: ['Operations', 'Admin', 'Customer care'] },
-  { id: '02', name: 'Executive', line: 'Experienced leaders for moments that need judgment and pace.', tags: ['Strategy', 'Leadership', 'Transformation'] },
-  { id: '03', name: 'Specialist', line: 'Focused expertise for the problem already on your desk.', tags: ['Finance', 'Creative', 'Technology'] },
-  { id: '04', name: 'Hire', line: 'A thoughtful search for the person who belongs on your team.', tags: ['Permanent', 'Contract', 'Project'] },
-]
-
-export const people = [
-  { name: 'Maya', role: 'OPERATIONS LEAD', place: 'JAKARTA', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Rafi', role: 'PRODUCT STRATEGIST', place: 'SINGAPORE', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Alina', role: 'EXECUTIVE ASSISTANT', place: 'BALI', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85' },
+export const supportAreas = [
+  { id: '01', name: 'Inbox', line: 'Keep messages sorted, routine replies moving, and follow-ups from disappearing.', tags: ['Triage', 'Draft replies', 'Follow-up'] },
+  { id: '02', name: 'Calendar', line: 'Turn a crowded schedule into a workday with room to think.', tags: ['Scheduling', 'Coordination', 'Travel'] },
+  { id: '03', name: 'Operations', line: 'Keep the recurring admin, reports, files, and CRM details in order.', tags: ['CRM updates', 'Research', 'Reporting'] },
+  { id: '04', name: 'Customers', line: 'Give routine questions and customer follow-ups a reliable owner.', tags: ['Customer care', 'Ecommerce', 'Updates'] },
 ]

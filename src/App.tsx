@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDownRight, ArrowUpRight, Asterisk, Menu, X } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, Asterisk, CalendarDays, Check, Inbox, Menu, RefreshCw, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { people, services } from './data'
+import { supportAreas } from './data'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -16,10 +16,10 @@ function Header() {
       {open ? <X /> : <Menu />}
     </button>
     <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
-      <a href="#services" onClick={() => setOpen(false)}>Services</a>
-      <a href="#talent" onClick={() => setOpen(false)}>Talent</a>
+      <a href="#support" onClick={() => setOpen(false)}>Support</a>
+      <a href="#tasks" onClick={() => setOpen(false)}>What we handle</a>
       <a href="#process" onClick={() => setOpen(false)}>Process</a>
-      <a className="nav-cta" href="#contact" onClick={() => setOpen(false)}>Start a conversation <ArrowUpRight /></a>
+      <a className="nav-cta" href="#contact" onClick={() => setOpen(false)}>Find an assistant <ArrowUpRight /></a>
     </nav>
   </header>
 }
@@ -35,15 +35,15 @@ function Hero() {
     return () => ctx.revert()
   }, [])
   return <section className="hero" id="top" ref={ref}>
-    <div className="hero-meta"><span>Talent, thoughtfully placed</span><span>Indonesia ↗ The world</span></div>
+    <div className="hero-meta"><span>Dedicated virtual assistance</span><span>Bali ↗ Your workday</span></div>
     <h1>
-      <span className="hero-line"><span className="hero-word-people">PEOPLE</span></span>
-      <span className="hero-line offset"><span>WORTH</span></span>
-      <span className="hero-line"><span>WORKING WITH.</span></span>
+      <span className="hero-line"><span className="hero-word-people">YOUR TIME</span></span>
+      <span className="hero-line offset"><span>BELONGS</span></span>
+      <span className="hero-line"><span>ELSEWHERE.</span></span>
     </h1>
-    <div className="hero-orbit" aria-hidden="true"><span>RIGHT PEOPLE • RIGHT WORK • </span></div>
-    <p className="hero-note">We find sharp, good people for ambitious teams. Human judgment included.</p>
-    <a className="scroll-cue" href="#positioning"><ArrowDownRight /> SCROLL TO MEET THEM</a>
+    <div className="hero-orbit" aria-hidden="true"><span>RIGHT SUPPORT • RIGHT TIME • </span></div>
+    <p className="hero-note">A dedicated Allo Assistant handles the recurring work, so you can stay focused on the decisions only you can make.</p>
+    <a className="scroll-cue" href="#positioning"><ArrowDownRight /> SEE WHAT TO HAND OFF</a>
   </section>
 }
 
@@ -58,75 +58,74 @@ function Positioning() {
   }, [])
   return <section className="positioning" id="positioning" ref={ref}>
     <p className="kicker">01 / THE POINT</p>
-    <div className="position-lines" aria-label="You do not need more people. You need the right people.">
-      <div className="line-a">YOU DON'T NEED <i>MORE</i> PEOPLE.</div>
-      <div className="line-b">YOU NEED THE <i>RIGHT</i> PEOPLE.</div>
+    <div className="position-lines" aria-label="Your inbox should not be your second job. Hand off what keeps repeating.">
+      <div className="line-a">YOUR INBOX IS NOT YOUR <i>SECOND JOB.</i></div>
+      <div className="line-b">HAND OFF WHAT KEEPS <i>REPEATING.</i></div>
     </div>
   </section>
 }
 
 function ServiceSystem() {
   const [selected, setSelected] = useState(0)
-  const active = services[selected]
-  return <section className="services-section" id="services">
-    <div className="section-head"><p className="kicker">02 / ONE SOCIETY, FOUR WAYS IN</p><p>Choose the shape of support you need.</p></div>
+  const active = supportAreas[selected]
+  return <section className="services-section" id="support">
+    <div className="section-head"><p className="kicker">02 / WHAT YOUR ASSISTANT CAN OWN</p><p>Start with the work already taking up your week.</p></div>
     <div className="service-stage">
-      <div className="constellation" aria-label="Allo Society services">
-        <div className="allo-core"><Asterisk /> <span>ALLO</span></div>
-        {services.map((service, index) => <button key={service.name} className={`service-node node-${index} ${selected === index ? 'active' : ''}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)}>
-          <span>{service.id}</span> ALLO {service.name.toUpperCase()}
+      <div className="constellation" aria-label="Virtual assistant support areas">
+        <div className="allo-core"><Asterisk /> <span>YOUR VA</span></div>
+        {supportAreas.map((area, index) => <button key={area.name} className={`service-node node-${index} ${selected === index ? 'active' : ''}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)}>
+          <span>{area.id}</span> {area.name.toUpperCase()}
         </button>)}
         <svg className="constellation-lines" viewBox="0 0 700 520" aria-hidden="true"><path d="M350 260 L120 95 M350 260 L585 100 M350 260 L110 430 M350 260 L590 420" /></svg>
       </div>
       <AnimatePresence mode="wait">
         <motion.article className="service-detail" key={active.name} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: .35 }}>
-          <div className="service-number">ALLO / {active.id}</div>
+          <div className="service-number">YOUR ASSISTANT / {active.id}</div>
           <h2>{active.name}</h2>
           <p>{active.line}</p>
           <ul>{active.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-          <a href="#contact">Explore this path <ArrowUpRight /></a>
+          <a href="#contact">Hand this off <ArrowUpRight /></a>
         </motion.article>
       </AnimatePresence>
     </div>
   </section>
 }
 
-function Talent() {
+function Delegation() {
   const ref = useRef<HTMLElement>(null)
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.person-card', { y: 180, rotate: i => [-7, 4, 9][i], stagger: .12, scrollTrigger: { trigger: ref.current, start: 'top 70%', end: 'center center', scrub: 1 } })
+      gsap.from('.work-card', { y: 180, rotate: i => [-7, 4, 9][i], stagger: .12, scrollTrigger: { trigger: ref.current, start: 'top 70%', end: 'center center', scrub: 1 } })
     }, ref)
     return () => ctx.revert()
   }, [])
-  return <section className="talent-section" id="talent" ref={ref}>
-    <div className="talent-copy"><p className="kicker">03 / PEOPLE, NOT INVENTORY</p><h2>A shortlist should feel <em>short.</em></h2><p>We look for context, curiosity and the kind of competence people trust. Then we introduce only the people worth meeting.</p></div>
-    <div className="people-stack">
-      {people.map((person, index) => <article className={`person-card person-${index}`} key={person.name}>
-        <img src={person.image} alt={`Portrait of ${person.name}, ${person.role.toLowerCase()}`} loading="lazy" />
-        <div><strong>{person.name}</strong><span>{person.role}</span><small>{person.place} / AVAILABLE</small></div>
-      </article>)}
-      <div className="stamp" aria-hidden="true">GOOD PEOPLE<br />FOUND HERE</div>
+  return <section className="talent-section" id="tasks" ref={ref}>
+    <div className="talent-copy"><p className="kicker">03 / A WORKDAY WITH BACKUP</p><h2>One assistant. Built around <em>your work.</em></h2><p>Your assistant learns the tools, routines, and details that keep your business moving. You keep the decisions. They keep the recurring work under control.</p></div>
+    <div className="work-stack" aria-label="Examples of delegated work">
+      <article className="work-card work-0"><Inbox /><small>08:15 / INBOX</small><h3>12 messages sorted</h3><p>Three replies drafted. Two follow-ups scheduled. Nothing urgent missed.</p><span><Check /> DONE BEFORE YOUR FIRST CALL</span></article>
+      <article className="work-card work-1"><CalendarDays /><small>10:40 / CALENDAR</small><h3>Next week, organised</h3><p>Meetings confirmed, notes attached, and travel options ready to review.</p><span><Check /> READY WHEN YOU ARE</span></article>
+      <article className="work-card work-2"><RefreshCw /><small>15:20 / OPERATIONS</small><h3>CRM kept current</h3><p>New leads entered, records cleaned, and outstanding actions flagged.</p><span><Check /> DETAILS UNDER CONTROL</span></article>
+      <div className="stamp" aria-hidden="true">YOUR TIME<br />BACK TO YOU</div>
     </div>
   </section>
 }
 
-const steps = ['DISCOVER', 'SCREEN', 'MATCH', 'INTERVIEW', 'HIRE']
+const steps = ['TELL US', 'SHAPE THE ROLE', 'MEET YOUR ASSISTANT', 'SET UP THE WORK', 'KEEP MOVING']
 
 function Process() {
   return <section className="process-section" id="process">
-    <div className="section-head light"><p className="kicker">04 / HOW IT MOVES</p><p>Clear enough to follow. Careful enough to work.</p></div>
+    <div className="section-head light"><p className="kicker">04 / HOW IT STARTS</p><p>A managed setup, without the freelancer search.</p></div>
     <ol className="process-list">{steps.map((step, index) => <li key={step}><span>0{index + 1}</span><strong>{step}</strong><i>{index === steps.length - 1 ? '●' : '↓'}</i></li>)}</ol>
-    <p className="process-foot">BALI <span>→</span> GLOBAL TALENT <span>→</span> YOUR TEAM</p>
+    <p className="process-foot">BALI <span>→</span> YOUR ASSISTANT <span>→</span> YOUR TIME BACK</p>
   </section>
 }
 
 function Contact() {
   return <footer className="contact" id="contact">
     <p className="kicker">05 / SAY ALLO</p>
-    <h2>BUILD<br /><span>YOUR</span><br />TEAM.</h2>
+    <h2>FIND<br /><span>YOUR</span><br />ASSISTANT.</h2>
     <a className="contact-button" href="mailto:hello@allosociety.co">hello@allosociety.co <ArrowUpRight /></a>
-    <div className="footer-line"><span>ALLO SOCIETY © 2026</span><span>PEOPLE WORTH WORKING WITH</span><a href="#top">BACK TO TOP ↑</a></div>
+    <div className="footer-line"><span>ALLO SOCIETY © 2026</span><span>VIRTUAL SUPPORT FROM BALI</span><a href="#top">BACK TO TOP ↑</a></div>
   </footer>
 }
 
@@ -147,5 +146,5 @@ export function App() {
     window.addEventListener('pointermove', move)
     return () => window.removeEventListener('pointermove', move)
   }, [])
-  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Talent /><Process /></main><Contact /></>
+  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><Process /></main><Contact /></>
 }

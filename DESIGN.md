@@ -3,7 +3,7 @@
 ## Source of truth
 - Status: Draft
 - Last refreshed: 2026-09-12
-- Primary product surfaces: Homepage interaction prototype
+- Primary product surfaces: Allo Assistant landing page prototype
 - Evidence reviewed: `Allo_Society_Website_Master_Brief.md`; `Allo.Society Brand Identity System.zip`; Warhol Arts, amo.co, Oddly Made, Readymag Ancient Artifacts, and Yaara Israeli references
 
 ## Brand
@@ -12,22 +12,22 @@
 - Avoid: Corporate staffing templates, polished stock-business language, purple gradients, generic card grids
 
 ## Product goals
-- Goals: Make the talent model understandable and memorable; convert qualified teams into conversations
-- Non-goals: Candidate portal, CRM, large service catalogue, production backend
-- Success signals: Service exploration, process understanding, inquiry starts
+- Goals: Make the managed Virtual Assistant offer understandable and memorable; convert founders and small teams into inquiries
+- Non-goals: Hiring marketplace, candidate profiles, recruitment service, CRM, production backend
+- Success signals: Support-area exploration, delegation understanding, assistant inquiries
 
 ## Personas and jobs
-- Primary personas: Founders, operations leaders, people leaders, candidates
-- User jobs: Understand Allo's offer, select a hiring path, begin a conversation
+- Primary personas: Founders, small-team leaders, operators
+- User jobs: Understand what a Virtual Assistant can own, picture delegation, begin a conversation
 - Key contexts of use: Desktop research, laptop presentations, mobile discovery
 
 ## Information architecture
-- Primary navigation: Services, Talent, Process, About, Contact
+- Primary navigation: Support, What we handle, Process, Contact
 - Core routes/screens: Single-page prototype
-- Content hierarchy: Positioning, service system, people, process, CTA
+- Content hierarchy: Time-back positioning, support areas, delegated work, managed setup, CTA
 
 ## Design principles
-- Transformation over decoration: Motion explains how people become teams
+- Transformation over decoration: Motion shows recurring work moving off the founder's desk
 - One connected system: Every scene reuses lines, nodes, labels, or image fragments
 - Editorial confidence: Large type, visible grid logic, restrained copy
 - Tradeoffs: Richer desktop choreography simplifies into touch-safe vertical movement on mobile
@@ -42,7 +42,7 @@
 
 ## Components
 - Existing components to reuse: None
-- New/changed components: Navigation, service constellation, talent dossier stack, process rail, CTA
+- New/changed components: Navigation, support-area constellation, delegated-work stack, setup process rail, CTA
 - Variants and states: Rest, hover/focus, selected service, reduced-motion
 - Token/component ownership: CSS custom properties in `src/styles.css`
 
@@ -68,7 +68,7 @@
 
 ## Content voice
 - Tone: Direct, warm, specific
-- Terminology: People, teams, work, match
+- Terminology: Assistant, support, work, delegation, time back
 - Microcopy rules: Short sentences, no em dashes, no inflated claims
 
 ## Implementation constraints
