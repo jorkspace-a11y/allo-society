@@ -30,6 +30,7 @@
 - Transformation over decoration: Motion shows recurring work moving off the founder's desk
 - One connected system: Every scene reuses lines, nodes, labels, or image fragments
 - Editorial confidence: Large type, visible grid logic, restrained copy
+- Edge through friction: Cropped media, skewed type, hard color takeovers, and deliberate off-grid movement should interrupt the otherwise disciplined system
 - Tradeoffs: Richer desktop choreography simplifies into touch-safe vertical movement on mobile
 
 ## Visual language
@@ -37,7 +38,7 @@
 - Typography: Official Cormorant logo treatment, wide grotesk display typography, and monospaced metadata
 - Spacing/layout rhythm: 12-column desktop logic, asymmetric crops, oversized gutters
 - Shape/radius/elevation: Mostly square; circles represent people and connection points
-- Motion: Cursor drift, text compression, pinned-feeling scenes, purposeful state transitions
+- Motion: Cursor drift, text compression, pinned-feeling scenes, hard project transitions, lateral row movement, and full-screen case-study takeovers
 - Imagery/iconography: Documentary-style portraits and simple diagram marks
 
 ## Components

@@ -209,7 +209,7 @@ function OurWork() {
     focusSelectedProject()
   }
   return <section className="work-section" id="work">
-    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>Selected projects / Full records on site</p></div>
+    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>Real work / Open every project</p></div>
     <div className="work-intro"><h2>Work,<br /><em>in context.</em></h2><div><p>Selected work by the team behind Allo Society. Open any project for the role, scope, and recorded result without leaving this site.</p><span>PROJECT INDEX / 01—04</span></div></div>
     <div className="work-showcase">
       <div className="work-stage" aria-live="polite">
@@ -236,6 +236,7 @@ function OurWork() {
     <AnimatePresence>
       {projectOpen && <motion.div className="project-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={closeProject}>
         <motion.article className="project-case" role="dialog" aria-modal="true" aria-labelledby="project-case-title" initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ duration: .55, ease: [.76, 0, .24, 1] }} onMouseDown={event => event.stopPropagation()}>
+          <span className="project-case-number" aria-hidden="true">0{selected + 1}</span>
           <div className="project-case-head"><span>ALLO SOCIETY / PROJECT 0{selected + 1}</span><button ref={closeProjectRef} onClick={closeProject} aria-label="Close project"><X /> CLOSE</button></div>
           <div className="project-case-title"><div><span>{active.discipline} / {active.status}</span><h2 id="project-case-title">{active.name}</h2><p>{active.role}</p></div><strong>{active.proof}</strong></div>
           <div className="project-case-body">
