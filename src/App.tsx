@@ -12,7 +12,7 @@ const navigation = [
   { label: 'Home', href: '#top', target: 'top' },
   { label: 'Solutions', href: '#support', target: 'support' },
   { label: 'Services', href: '#services', target: 'services' },
-  { label: 'Our Work', href: '#process', target: 'process' },
+  { label: 'Our Work', href: '#work', target: 'work' },
   { label: 'Resources', href: '#resources', target: 'resources' },
   { label: 'Pricing', href: '#pricing', target: 'pricing' },
   { label: 'About', href: '#about', target: 'about' },
@@ -127,11 +127,91 @@ function Delegation() {
   </section>
 }
 
+const workExamples = [
+  {
+    name: 'Executive inbox',
+    discipline: 'COMMUNICATION',
+    status: 'EXAMPLE WORKFLOW',
+    role: 'Triage, drafting, and follow-up',
+    summary: 'Priority messages are surfaced, routine replies are drafted, and every promised follow-up stays visible.',
+    proof: 'Urgent → flagged / Routine → drafted',
+    metric: '12',
+    metricLabel: 'MESSAGES SORTED',
+    steps: ['TRIAGE', 'DRAFT', 'FOLLOW UP'],
+  },
+  {
+    name: 'Calendar & travel',
+    discipline: 'COORDINATION',
+    status: 'EXAMPLE WORKFLOW',
+    role: 'Scheduling, preparation, and logistics',
+    summary: 'Meetings are confirmed with the right context attached, while travel options arrive ready for a decision.',
+    proof: 'Schedule → confirmed / Context → attached',
+    metric: '7',
+    metricLabel: 'DAYS ORGANISED',
+    steps: ['SCHEDULE', 'CONFIRM', 'PREPARE'],
+  },
+  {
+    name: 'Customer follow-up',
+    discipline: 'CUSTOMER SUPPORT',
+    status: 'EXAMPLE WORKFLOW',
+    role: 'Response, routing, and escalation',
+    summary: 'Common questions move quickly, exceptions reach the right person, and customers are never left wondering.',
+    proof: 'Questions → answered / Exceptions → escalated',
+    metric: '0',
+    metricLabel: 'LOOSE ENDS',
+    steps: ['RESPOND', 'ROUTE', 'ESCALATE'],
+  },
+  {
+    name: 'Operations admin',
+    discipline: 'BUSINESS OPERATIONS',
+    status: 'EXAMPLE WORKFLOW',
+    role: 'CRM, reporting, and task coordination',
+    summary: 'Records stay current, recurring reports arrive on time, and outstanding actions have a clear owner.',
+    proof: 'Records → current / Actions → assigned',
+    metric: '1',
+    metricLabel: 'CLEAR SOURCE OF TRUTH',
+    steps: ['UPDATE', 'REPORT', 'COORDINATE'],
+  },
+]
+
+function OurWork() {
+  const [selected, setSelected] = useState(0)
+  const active = workExamples[selected]
+  return <section className="work-section" id="work">
+    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>See how recurring work moves through an Allo day.</p></div>
+    <div className="work-showcase">
+      <div className="work-stage" aria-live="polite">
+        <AnimatePresence mode="wait">
+          <motion.div className="work-visual" key={active.name} initial={{ opacity: 0, scale: .97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.02 }} transition={{ duration: .45 }}>
+            <div className="workflow-visual">
+              <span>ALLO WORKFLOW / 0{selected + 1}</span>
+              <div className="workflow-metric"><strong>{active.metric}</strong><small>{active.metricLabel}</small></div>
+              <ol>{active.steps.map((step, index) => <li key={step}><span>0{index + 1}</span>{step}<i>{index === active.steps.length - 1 ? '●' : '↓'}</i></li>)}</ol>
+              <p>{active.proof}</p>
+            </div>
+            <div className="work-caption"><span>0{selected + 1} / 04</span><span>ILLUSTRATIVE WORKFLOW</span></div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+      <div className="work-browser" role="list" aria-label="Examples of Allo Society work">
+        {workExamples.map((example, index) => <button key={example.name} className={selected === index ? 'active' : ''} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)} aria-pressed={selected === index}>
+          <span className="work-index">0{index + 1}</span>
+          <span className="work-entry"><small>{example.discipline} / {example.status}</small><strong>{example.name}</strong><em>{example.role}</em></span>
+          <span className="work-arrow">↗</span>
+        </button>)}
+        <AnimatePresence mode="wait"><motion.article className="work-detail" key={active.name} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }}>
+          <p>{active.summary}</p><strong>{active.proof}</strong><a href="#contact">Plan this workflow <ArrowUpRight /></a>
+        </motion.article></AnimatePresence>
+      </div>
+    </div>
+  </section>
+}
+
 const steps = ['TELL US', 'SHAPE THE ROLE', 'MEET YOUR ASSISTANT', 'SET UP THE WORK', 'KEEP MOVING']
 
 function Process() {
   return <section className="process-section" id="process">
-    <div className="section-head light"><p className="kicker">04 / HOW IT STARTS</p><p>A managed setup, without the freelancer search.</p></div>
+    <div className="section-head light"><p className="kicker">05 / HOW IT STARTS</p><p>A managed setup, without the freelancer search.</p></div>
     <ol className="process-list">{steps.map((step, index) => <li key={step}><span>0{index + 1}</span><strong>{step}</strong><i>{index === steps.length - 1 ? '●' : '↓'}</i></li>)}</ol>
     <p className="process-foot">BALI <span>→</span> YOUR ASSISTANT <span>→</span> YOUR TIME BACK</p>
   </section>
@@ -147,7 +227,7 @@ function Resources() {
   const [selected, setSelected] = useState(0)
   const active = resources[selected]
   return <section className="resources-section" id="resources">
-    <div className="section-head"><p className="kicker">05 / RESOURCES</p><p>Useful before you delegate.</p></div>
+    <div className="section-head"><p className="kicker">06 / RESOURCES</p><p>Useful before you delegate.</p></div>
     <div className="resource-layout">
       <div className="resource-intro"><h2>Start with<br /><em>clarity.</em></h2><p>Good support begins with a clear handoff. These short resources help you decide what to delegate and how to set it up.</p></div>
       <div className="resource-browser">
@@ -176,7 +256,7 @@ function Pricing() {
   const [selected, setSelected] = useState(1)
   const active = supportLevels[selected]
   return <section className="pricing-section" id="pricing">
-    <div className="section-head light"><p className="kicker">06 / PRICING</p><p>Choose the rhythm, then shape the role.</p></div>
+    <div className="section-head light"><p className="kicker">07 / PRICING</p><p>Choose the rhythm, then shape the role.</p></div>
     <div className="pricing-layout">
       <div><span className="pricing-eyebrow">HOURS / WEEK</span><div className="hours-selector" role="group" aria-label="Weekly support hours">
         {supportLevels.map((level, index) => <button key={level.hours} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} aria-pressed={selected === index}>{level.hours}</button>)}
@@ -190,7 +270,7 @@ function Pricing() {
 
 function About() {
   return <section className="about-section" id="about">
-    <div className="section-head"><p className="kicker">07 / ABOUT ALLO</p><p>Bali based. Internationally minded.</p></div>
+    <div className="section-head"><p className="kicker">08 / ABOUT ALLO</p><p>Bali based. Internationally minded.</p></div>
     <div className="about-statement"><span>Born in Bali.</span><strong>Built for busy teams</strong><em>everywhere.</em></div>
     <div className="about-foot"><p>Allo Society gives founders and small teams dedicated virtual support without turning delegation into another job.</p><a href="#contact">Say Allo <ArrowUpRight /></a></div>
   </section>
@@ -198,7 +278,7 @@ function About() {
 
 function Contact() {
   return <footer className="contact" id="contact">
-    <p className="kicker">08 / SAY ALLO</p>
+    <p className="kicker">09 / SAY ALLO</p>
     <h2>FIND<br /><span>YOUR</span><br />ASSISTANT.</h2>
     <a className="contact-button" href="mailto:hello@allosociety.co">hello@allosociety.co <ArrowUpRight /></a>
     <div className="footer-line"><span>ALLO SOCIETY © 2026</span><span>VIRTUAL SUPPORT FROM BALI</span><a href="#top">BACK TO TOP ↑</a></div>
@@ -222,5 +302,5 @@ export function App() {
     window.addEventListener('pointermove', move)
     return () => window.removeEventListener('pointermove', move)
   }, [])
-  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><Process /><Resources /><Pricing /><About /></main><Contact /></>
+  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><OurWork /><Process /><Resources /><Pricing /><About /></main><Contact /></>
 }

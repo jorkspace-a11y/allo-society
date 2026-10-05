@@ -11,7 +11,7 @@
   font-synthesis: none;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 54px; }
 body { margin: 0; overflow-x: hidden; }
 button, a { color: inherit; }
 a { text-decoration: none; }
@@ -85,6 +85,32 @@ button { font: inherit; }
 .work-card span svg { width: 14px; color: var(--accent); }
 .work-0 { left: 3%; top: 22%; transform: rotate(-6deg); }.work-1 { left: 31%; top: 4%; z-index: 2; transform: rotate(3deg); }.work-2 { right: 1%; top: 28%; transform: rotate(8deg); }
 .stamp { position: absolute; z-index: 4; right: 2%; top: 7%; width: 130px; aspect-ratio: 1; display: grid; place-items: center; border: 2px solid; border-radius: 50%; transform: rotate(12deg); text-align: center; font: 500 10px/1.5 var(--mono); background: var(--paper); color: var(--ink); }
+.work-section { min-height: 105vh; padding: 28px 24px 90px; background: var(--paper); color: var(--ink); }
+.work-showcase { min-height: 820px; max-width: 1440px; margin: 64px auto 0; display: grid; grid-template-columns: 1.08fr .92fr; gap: 5vw; align-items: center; }
+.work-stage { position: relative; height: min(68vh, 660px); min-height: 520px; overflow: hidden; background: var(--ink); }
+.work-visual { position: absolute; inset: 0; }
+.workflow-visual { height: calc(100% - 48px); padding: 42px; display: flex; flex-direction: column; background: var(--ink); color: var(--paper); }
+.workflow-visual > span { font: 9px var(--mono); letter-spacing: .1em; color: #8a8882; }
+.workflow-metric { margin: auto 0 22px; display: flex; align-items: flex-end; gap: 22px; }
+.workflow-metric strong { font-size: clamp(7rem, 13vw, 13rem); line-height: .68; font-weight: 500; letter-spacing: -.1em; color: var(--accent); }
+.workflow-metric small { max-width: 110px; padding-bottom: 4px; font: 10px/1.45 var(--mono); letter-spacing: .08em; }
+.workflow-visual ol { margin: 26px 0 24px; padding: 0; list-style: none; border-top: 1px solid #454548; }
+.workflow-visual li { display: grid; grid-template-columns: 42px 1fr 18px; padding: 12px 0; border-bottom: 1px solid #454548; font: 10px var(--mono); letter-spacing: .08em; }
+.workflow-visual li span { color: #777; }.workflow-visual li i { color: var(--accent); font-style: normal; }
+.workflow-visual > p { margin: 0; font: 10px var(--mono); text-transform: uppercase; }
+.work-caption { position: absolute; left: 0; right: 0; bottom: 0; height: 48px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; background: #171719; color: #999; font: 9px var(--mono); letter-spacing: .08em; }
+.work-browser { border-top: 1px solid; }
+.work-browser > button { width: 100%; min-height: 104px; display: grid; grid-template-columns: 42px 1fr 28px; gap: 14px; align-items: center; border: 0; border-bottom: 1px solid; padding: 14px 4px; background: transparent; color: var(--ink); text-align: left; cursor: pointer; transition: color .25s, padding .3s; }
+.work-browser > button:hover, .work-browser > button:focus-visible, .work-browser > button.active { color: var(--accent); padding-left: 18px; }
+.work-index, .work-arrow { font: 10px var(--mono); }.work-arrow { font-size: 22px; transition: transform .25s; }
+.work-browser > button:hover .work-arrow, .work-browser > button.active .work-arrow { transform: translate(3px, -3px); }
+.work-entry { display: flex; flex-direction: column; gap: 4px; }
+.work-entry small { font: 8px var(--mono); letter-spacing: .08em; }.work-entry strong { font-size: clamp(1.45rem, 2.2vw, 2.3rem); line-height: 1; letter-spacing: -.055em; font-weight: 500; }.work-entry em { font: 400 11px var(--sans); color: #666; }
+.work-detail { padding: 30px 4px 0; }
+.work-detail p { max-width: 520px; margin: 0 0 18px; font-size: 15px; line-height: 1.55; }
+.work-detail > strong { display: block; font: 500 10px var(--mono); color: var(--accent); text-transform: uppercase; }
+.work-detail a { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; padding-bottom: 7px; border-bottom: 1px solid; font: 10px var(--mono); text-transform: uppercase; }
+.work-detail svg { width: 15px; }
 .process-section { min-height: 100vh; padding: 28px 24px 50px; background: var(--ink); color: var(--paper); display: flex; flex-direction: column; }
 .process-list { margin: auto 0; padding: 0; list-style: none; }
 .process-list li { display: grid; grid-template-columns: 80px 1fr 30px; align-items: center; border-top: 1px solid #4b4b48; padding: 9px 0 6px; }
@@ -164,7 +190,7 @@ button { font: inherit; }
   .positioning { min-height: 75vh; }
   .position-lines { font-size: 15vw; white-space: normal; }
   .position-lines div { padding: .25em 16px; }
-  .services-section, .process-section, .contact { padding-left: 16px; padding-right: 16px; }
+  .services-section, .work-section, .process-section, .contact { padding-left: 16px; padding-right: 16px; }
   .section-head > p:last-child { display: none; }
   .service-stage { display: block; min-height: 850px; }
   .constellation { min-height: 370px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
@@ -179,6 +205,14 @@ button { font: inherit; }
   .work-card { width: min(72vw, 300px); min-height: 360px; padding: 20px; }.work-0 { left: 0; top: 70px; }.work-1 { left: 13%; top: 250px; }.work-2 { right: 0; top: 440px; }
   .work-card h3 { font-size: 30px; }
   .stamp { width: 96px; right: 0; top: 0; }
+  .work-showcase { min-height: auto; margin-top: 54px; display: block; }
+  .work-stage { height: 520px; min-height: 0; margin-bottom: 42px; }
+  .workflow-visual { padding: 28px 22px; }
+  .workflow-metric { margin-top: auto; }.workflow-metric strong { font-size: 36vw; }.workflow-metric small { font-size: 8px; }
+  .work-browser > button { min-height: 90px; grid-template-columns: 32px 1fr 20px; padding-right: 0; }
+  .work-browser > button:hover, .work-browser > button:focus-visible, .work-browser > button.active { padding-left: 8px; }
+  .work-entry strong { font-size: 7vw; }.work-entry em { font-size: 10px; }
+  .work-detail { min-height: 260px; padding: 28px 4px 0; }
   .process-list li { grid-template-columns: 42px 1fr 20px; }
   .process-list strong { font-size: clamp(2.25rem, 10.5vw, 4rem); }
   .process-foot { font-size: 9px; gap: 2vw; }

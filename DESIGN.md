@@ -4,7 +4,7 @@
 - Status: Draft
 - Last refreshed: 2026-10-05
 - Primary product surfaces: Allo Assistant landing page prototype
-- Evidence reviewed: `Allo_Society_Website_Master_Brief.md`; `Allo.Society Brand Identity System.zip`; Warhol Arts, amo.co, Oddly Made, Readymag Ancient Artifacts, and Yaara Israeli references
+- Evidence reviewed: `Allo_Society_Website_Master_Brief.md`; `Allo.Society Brand Identity System.zip`; Warhol Arts, amo.co, Oddly Made, Readymag Ancient Artifacts, and Yaara Israeli references; interaction structure from the separate What Matters Built portfolio
 
 ## Brand
 - Personality: Human, editorial, bright, assured, unexpected
@@ -24,7 +24,7 @@
 ## Information architecture
 - Primary navigation: Home, Solutions, Services, Our Work, Resources, Pricing, About
 - Core routes/screens: Single-page prototype
-- Content hierarchy: Time-back positioning, solutions, services, work examples, resources, pricing guidance, brand story, CTA
+- Content hierarchy: Time-back positioning, solutions, services, illustrative VA workflows, setup process, resources, pricing guidance, brand story, CTA
 
 ## Design principles
 - Transformation over decoration: Motion shows recurring work moving off the founder's desk
@@ -42,7 +42,7 @@
 
 ## Components
 - Existing components to reuse: None
-- New/changed components: Active-section navigation, support-area constellation, delegated-work stack, setup process rail, resource browser, support-level selector, about statement, CTA
+- New/changed components: Active-section navigation, support-area constellation, delegated-work stack, interactive VA workflow showcase, setup process rail, resource browser, support-level selector, about statement, CTA
 - Variants and states: Rest, hover/focus, active section, selected solution/resource/support level, open mobile menu, reduced-motion
 - Token/component ownership: CSS custom properties in `src/styles.css`
 
@@ -69,7 +69,7 @@
 ## Content voice
 - Tone: Direct, warm, specific
 - Terminology: Assistant, support, work, delegation, time back
-- Microcopy rules: Short sentences, no em dashes, no inflated claims
+- Microcopy rules: Short sentences, no em dashes, no inflated claims; label hypothetical workflows as illustrative and never present What Matters Built portfolio work as Allo Society agency work
 
 ## Implementation constraints
 - Framework/styling system: React, Vite, TypeScript, GSAP, Lenis, Motion, plain CSS
