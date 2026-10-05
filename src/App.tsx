@@ -135,10 +135,15 @@ const workProjects = [
     role: 'Brand direction and website strategy',
     summary: 'Two connected workstreams brought a broad creative-technology offer into a clearer public presence.',
     proof: '2 connected workstreams',
+    challenge: 'A broad creative-technology offer needed a clearer public presence and a stronger path from capability to enquiry.',
+    work: [
+      'Built distinct brand-direction routes, logo systems, campaign applications, and landing-page concepts using the brand’s real photography and service context.',
+      'Structured and shipped the public website across services, work, resources, pricing, and contact paths, including responsive behavior, search foundations, analytics, lead routing, and production QA.',
+    ],
+    results: ['2 connected workstreams under one case study', '37 website pages covered by the recorded local SEO validation'],
     image: `${import.meta.env.BASE_URL}work/meta-pacific.webp`,
     alt: 'Meta Pacific brand direction and website application',
     fit: 'contain',
-    href: 'https://whatmattersbuilt.co/work/meta-pacific/',
   },
   {
     name: 'Blue Tick Ice',
@@ -147,7 +152,9 @@ const workProjects = [
     role: 'Operations lead across six departments',
     summary: 'Team training and a reporting pipeline replaced manual weekly reporting with a system built for faster action.',
     proof: 'Weekly reporting: 4 hours to under 5 minutes',
-    href: 'https://whatmattersbuilt.co/work/05-blue-tick-ice/',
+    challenge: 'Six departments needed shared operating practices and reliable reporting at a factory without standardised systems.',
+    work: ['Trained the team to full production capacity before touching software.', 'Built a reporting pipeline that replaced manual weekly reporting and made issues visible sooner.'],
+    results: ['Machine utilisation: 74% to 83%', 'Weekly executive reporting: 4 hours to under 5 minutes', '6 recurring premium accounts, 0 missed deliveries'],
   },
   {
     name: 'Digimune Indonesia',
@@ -156,10 +163,12 @@ const workProjects = [
     role: 'Multi-brand marketing management',
     summary: 'Three brands within one engagement received distinct visual directions, voices, and content calendars.',
     proof: '3 distinct brands, one coordinated engagement',
+    challenge: 'Cafero, XBooster, and 77 needed distinct calendars and voices without blurring together or being presented as separate client engagements.',
+    work: ['Built separate visual directions, brand voices, and content calendars for each Luna Project brand.', 'Kept the three systems coordinated under one engagement without flattening them into one generic feed.'],
+    results: ['3 distinct brand voices running in parallel', 'Ongoing multi-brand marketing for the Bali launches'],
     image: `${import.meta.env.BASE_URL}work/digimune-77.jpeg`,
     alt: '77 campaign artwork from the Digimune Indonesia engagement',
     fit: 'cover',
-    href: 'https://whatmattersbuilt.co/work/09-digimune-indonesia/',
   },
   {
     name: 'Soracha',
@@ -168,19 +177,40 @@ const workProjects = [
     role: 'Brand identity and photography direction',
     summary: 'A new food-and-beverage brand received the identity, photography direction, and social system needed to launch.',
     proof: 'Identity and campaign applications',
+    challenge: 'The brand started without name recognition, a visual identity, an online presence, or a large production budget.',
+    work: ['Mapped what the business actually needed before locking the visual direction.', 'Built the identity system, directed the launch photography, and created a social system the team could continue using.'],
+    results: ['Service-ready brand foundation', 'Identity, photography direction, and campaign applications', 'Launched as Soracha, Matcha Slow Bar'],
     image: `${import.meta.env.BASE_URL}work/soracha.jpeg`,
     alt: 'Soracha campaign photography and brand application',
     fit: 'cover',
-    href: 'https://whatmattersbuilt.co/work/01-soracha/',
   },
 ]
 
 function OurWork() {
   const [selected, setSelected] = useState(0)
+  const [projectOpen, setProjectOpen] = useState(false)
+  const closeProjectRef = useRef<HTMLButtonElement>(null)
   const active = workProjects[selected]
+  const focusSelectedProject = () => requestAnimationFrame(() => document.querySelector<HTMLButtonElement>('.work-browser > button.active')?.focus())
+  useEffect(() => {
+    if (!projectOpen) return
+    const previousOverflow = document.body.style.overflow
+    const keepFocusInside = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setProjectOpen(false); focusSelectedProject() }
+      if (event.key === 'Tab') { event.preventDefault(); closeProjectRef.current?.focus() }
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', keepFocusInside)
+    closeProjectRef.current?.focus()
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', keepFocusInside) }
+  }, [projectOpen])
+  const closeProject = () => {
+    setProjectOpen(false)
+    focusSelectedProject()
+  }
   return <section className="work-section" id="work">
-    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>Portfolio archive / What Matters Built</p></div>
-    <div className="work-intro"><h2>Work,<br /><em>in context.</em></h2><div><p>Selected work by the team behind Allo Society. Full case studies, roles, and results live on What Matters Built.</p><a href="https://whatmattersbuilt.co/work/" target="_blank" rel="noreferrer">Open the full portfolio <ArrowUpRight /></a></div></div>
+    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>Selected projects / Full records on site</p></div>
+    <div className="work-intro"><h2>Work,<br /><em>in context.</em></h2><div><p>Selected work by the team behind Allo Society. Open any project for the role, scope, and recorded result without leaving this site.</p><span>PROJECT INDEX / 01—04</span></div></div>
     <div className="work-showcase">
       <div className="work-stage" aria-live="polite">
         <AnimatePresence mode="wait">
@@ -192,17 +222,30 @@ function OurWork() {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="work-browser" role="list" aria-label="Selected work from What Matters Built">
+      <div className="work-browser" role="list" aria-label="Selected Allo Society work">
         {workProjects.map((project, index) => <button key={project.name} className={selected === index ? 'active' : ''} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)} aria-pressed={selected === index}>
           <span className="work-index">0{index + 1}</span>
           <span className="work-entry"><small>{project.discipline} / {project.status}</small><strong>{project.name}</strong><em>{project.role}</em></span>
           <span className="work-arrow">↗</span>
         </button>)}
         <AnimatePresence mode="wait"><motion.article className="work-detail" key={active.name} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }}>
-          <p>{active.summary}</p><strong>{active.proof}</strong><a href={active.href} target="_blank" rel="noreferrer">View the case study <ArrowUpRight /></a>
+          <p>{active.summary}</p><strong>{active.proof}</strong><button className="work-open" onClick={() => setProjectOpen(true)}>Open the project <ArrowUpRight /></button>
         </motion.article></AnimatePresence>
       </div>
     </div>
+    <AnimatePresence>
+      {projectOpen && <motion.div className="project-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={closeProject}>
+        <motion.article className="project-case" role="dialog" aria-modal="true" aria-labelledby="project-case-title" initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ duration: .55, ease: [.76, 0, .24, 1] }} onMouseDown={event => event.stopPropagation()}>
+          <div className="project-case-head"><span>ALLO SOCIETY / PROJECT 0{selected + 1}</span><button ref={closeProjectRef} onClick={closeProject} aria-label="Close project"><X /> CLOSE</button></div>
+          <div className="project-case-title"><div><span>{active.discipline} / {active.status}</span><h2 id="project-case-title">{active.name}</h2><p>{active.role}</p></div><strong>{active.proof}</strong></div>
+          <div className="project-case-body">
+            <section><span>01 / THE SITUATION</span><p>{active.challenge}</p></section>
+            <section><span>02 / THE WORK</span>{active.work.map(item => <p key={item}>{item}</p>)}</section>
+            <section className="project-results"><span>03 / RECORDED RESULTS</span><ul>{active.results.map(result => <li key={result}>{result}</li>)}</ul></section>
+          </div>
+        </motion.article>
+      </motion.div>}
+    </AnimatePresence>
   </section>
 }
 

@@ -42,8 +42,8 @@
 
 ## Components
 - Existing components to reuse: None
-- New/changed components: Active-section navigation, support-area constellation, delegated-work stack, image-led selected-work reel, setup process rail, resource browser, support-level selector, about statement, CTA
-- Variants and states: Rest, hover/focus, active section, selected solution/resource/support level, open mobile menu, reduced-motion
+- New/changed components: Active-section navigation, support-area constellation, delegated-work stack, image-led selected-work reel with on-site case-study panel, setup process rail, resource browser, support-level selector, about statement, CTA
+- Variants and states: Rest, hover/focus, active section, selected project/solution/resource/support level, open case study, open mobile menu, reduced-motion
 - Token/component ownership: CSS custom properties in `src/styles.css`
 
 ## Accessibility
@@ -69,7 +69,7 @@
 ## Content voice
 - Tone: Direct, warm, specific
 - Terminology: Assistant, support, work, delegation, time back
-- Microcopy rules: Short sentences, no em dashes, no inflated claims; present What Matters Built as the detailed portfolio archive and preserve the recorded role, status, and evidence for every selected project
+- Microcopy rules: Short sentences, no em dashes, no inflated claims; copy approved portfolio material into Allo rather than redirecting visitors, while preserving the recorded role, status, and evidence for every selected project
 
 ## Implementation constraints
 - Framework/styling system: React, Vite, TypeScript, GSAP, Lenis, Motion, plain CSS
