@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jorkspace-a11y.github.io/allo-society/sitemap.xml
