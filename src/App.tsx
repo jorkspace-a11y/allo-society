@@ -127,80 +127,79 @@ function Delegation() {
   </section>
 }
 
-const workExamples = [
+const workProjects = [
   {
-    name: 'Executive inbox',
-    discipline: 'COMMUNICATION',
-    status: 'EXAMPLE WORKFLOW',
-    role: 'Triage, drafting, and follow-up',
-    summary: 'Priority messages are surfaced, routine replies are drafted, and every promised follow-up stays visible.',
-    proof: 'Urgent → flagged / Routine → drafted',
-    metric: '12',
-    metricLabel: 'MESSAGES SORTED',
-    steps: ['TRIAGE', 'DRAFT', 'FOLLOW UP'],
+    name: 'Meta Pacific',
+    discipline: 'BRAND DIRECTION + WEB',
+    status: 'DELIVERED',
+    role: 'Brand direction and website strategy',
+    summary: 'Two connected workstreams brought a broad creative-technology offer into a clearer public presence.',
+    proof: '2 connected workstreams',
+    image: `${import.meta.env.BASE_URL}work/meta-pacific.webp`,
+    alt: 'Meta Pacific brand direction and website application',
+    fit: 'contain',
+    href: 'https://whatmattersbuilt.co/work/meta-pacific/',
   },
   {
-    name: 'Calendar & travel',
-    discipline: 'COORDINATION',
-    status: 'EXAMPLE WORKFLOW',
-    role: 'Scheduling, preparation, and logistics',
-    summary: 'Meetings are confirmed with the right context attached, while travel options arrive ready for a decision.',
-    proof: 'Schedule → confirmed / Context → attached',
-    metric: '7',
-    metricLabel: 'DAYS ORGANISED',
-    steps: ['SCHEDULE', 'CONFIRM', 'PREPARE'],
+    name: 'Blue Tick Ice',
+    discipline: 'OPERATIONS + SYSTEMS',
+    status: 'ONGOING',
+    role: 'Operations lead across six departments',
+    summary: 'Team training and a reporting pipeline replaced manual weekly reporting with a system built for faster action.',
+    proof: 'Weekly reporting: 4 hours to under 5 minutes',
+    href: 'https://whatmattersbuilt.co/work/05-blue-tick-ice/',
   },
   {
-    name: 'Customer follow-up',
-    discipline: 'CUSTOMER SUPPORT',
-    status: 'EXAMPLE WORKFLOW',
-    role: 'Response, routing, and escalation',
-    summary: 'Common questions move quickly, exceptions reach the right person, and customers are never left wondering.',
-    proof: 'Questions → answered / Exceptions → escalated',
-    metric: '0',
-    metricLabel: 'LOOSE ENDS',
-    steps: ['RESPOND', 'ROUTE', 'ESCALATE'],
+    name: 'Digimune Indonesia',
+    discipline: 'MARKETING + BRAND',
+    status: 'ONGOING',
+    role: 'Multi-brand marketing management',
+    summary: 'Three brands within one engagement received distinct visual directions, voices, and content calendars.',
+    proof: '3 distinct brands, one coordinated engagement',
+    image: `${import.meta.env.BASE_URL}work/digimune-77.jpeg`,
+    alt: '77 campaign artwork from the Digimune Indonesia engagement',
+    fit: 'cover',
+    href: 'https://whatmattersbuilt.co/work/09-digimune-indonesia/',
   },
   {
-    name: 'Operations admin',
-    discipline: 'BUSINESS OPERATIONS',
-    status: 'EXAMPLE WORKFLOW',
-    role: 'CRM, reporting, and task coordination',
-    summary: 'Records stay current, recurring reports arrive on time, and outstanding actions have a clear owner.',
-    proof: 'Records → current / Actions → assigned',
-    metric: '1',
-    metricLabel: 'CLEAR SOURCE OF TRUTH',
-    steps: ['UPDATE', 'REPORT', 'COORDINATE'],
+    name: 'Soracha',
+    discipline: 'BRAND + MARKETING',
+    status: 'DELIVERED',
+    role: 'Brand identity and photography direction',
+    summary: 'A new food-and-beverage brand received the identity, photography direction, and social system needed to launch.',
+    proof: 'Identity and campaign applications',
+    image: `${import.meta.env.BASE_URL}work/soracha.jpeg`,
+    alt: 'Soracha campaign photography and brand application',
+    fit: 'cover',
+    href: 'https://whatmattersbuilt.co/work/01-soracha/',
   },
 ]
 
 function OurWork() {
   const [selected, setSelected] = useState(0)
-  const active = workExamples[selected]
+  const active = workProjects[selected]
   return <section className="work-section" id="work">
-    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>See how recurring work moves through an Allo day.</p></div>
+    <div className="section-head"><p className="kicker">04 / OUR WORK</p><p>Portfolio archive / What Matters Built</p></div>
+    <div className="work-intro"><h2>Work,<br /><em>in context.</em></h2><div><p>Selected work by the team behind Allo Society. Full case studies, roles, and results live on What Matters Built.</p><a href="https://whatmattersbuilt.co/work/" target="_blank" rel="noreferrer">Open the full portfolio <ArrowUpRight /></a></div></div>
     <div className="work-showcase">
       <div className="work-stage" aria-live="polite">
         <AnimatePresence mode="wait">
           <motion.div className="work-visual" key={active.name} initial={{ opacity: 0, scale: .97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.02 }} transition={{ duration: .45 }}>
-            <div className="workflow-visual">
-              <span>ALLO WORKFLOW / 0{selected + 1}</span>
-              <div className="workflow-metric"><strong>{active.metric}</strong><small>{active.metricLabel}</small></div>
-              <ol>{active.steps.map((step, index) => <li key={step}><span>0{index + 1}</span>{step}<i>{index === active.steps.length - 1 ? '●' : '↓'}</i></li>)}</ol>
-              <p>{active.proof}</p>
-            </div>
-            <div className="work-caption"><span>0{selected + 1} / 04</span><span>ILLUSTRATIVE WORKFLOW</span></div>
+            {active.image
+              ? <img className={`work-image ${active.fit === 'contain' ? 'contain' : ''}`} src={active.image} alt={active.alt} />
+              : <div className="operations-visual"><span>BLUE TICK ICE / WEEKLY REPORTING</span><div><small>BEFORE</small><strong>4 hrs</strong></div><i>→</i><div><small>AFTER</small><strong>&lt; 5 min</strong></div><p>RECORDED EXECUTIVE REPORTING TIME</p></div>}
+            <div className="work-caption"><span>0{selected + 1} / 04</span><span>{active.name}</span></div>
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="work-browser" role="list" aria-label="Examples of Allo Society work">
-        {workExamples.map((example, index) => <button key={example.name} className={selected === index ? 'active' : ''} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)} aria-pressed={selected === index}>
+      <div className="work-browser" role="list" aria-label="Selected work from What Matters Built">
+        {workProjects.map((project, index) => <button key={project.name} className={selected === index ? 'active' : ''} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)} aria-pressed={selected === index}>
           <span className="work-index">0{index + 1}</span>
-          <span className="work-entry"><small>{example.discipline} / {example.status}</small><strong>{example.name}</strong><em>{example.role}</em></span>
+          <span className="work-entry"><small>{project.discipline} / {project.status}</small><strong>{project.name}</strong><em>{project.role}</em></span>
           <span className="work-arrow">↗</span>
         </button>)}
         <AnimatePresence mode="wait"><motion.article className="work-detail" key={active.name} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }}>
-          <p>{active.summary}</p><strong>{active.proof}</strong><a href="#contact">Plan this workflow <ArrowUpRight /></a>
+          <p>{active.summary}</p><strong>{active.proof}</strong><a href={active.href} target="_blank" rel="noreferrer">View the case study <ArrowUpRight /></a>
         </motion.article></AnimatePresence>
       </div>
     </div>
