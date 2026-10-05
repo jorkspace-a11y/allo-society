@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDownRight, ArrowUpRight, Asterisk, CalendarDays, Check, Inbox, Menu, RefreshCw, X } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, CalendarDays, Check, Inbox, Menu, RefreshCw, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import gsap from 'gsap'
@@ -86,25 +86,27 @@ function ServiceSystem() {
   const [selected, setSelected] = useState(0)
   const active = supportAreas[selected]
   return <section className="services-section" id="support">
-    <div className="section-head"><p className="kicker">02 / WHAT YOUR ASSISTANT CAN OWN</p><p>Start with the work already taking up your week.</p></div>
-    <div className="service-stage">
-      <div className="constellation" aria-label="Virtual assistant support areas">
-        <div className="allo-core"><Asterisk /> <span>YOUR VA</span></div>
-        {supportAreas.map((area, index) => <button key={area.name} className={`service-node node-${index} ${selected === index ? 'active' : ''}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)}>
-          <span>{area.id}</span> {area.name.toUpperCase()}
-        </button>)}
-        <svg className="constellation-lines" viewBox="0 0 700 520" aria-hidden="true"><path d="M350 260 L120 95 M350 260 L585 100 M350 260 L110 430 M350 260 L590 420" /></svg>
-      </div>
-      <AnimatePresence mode="wait">
-        <motion.article className="service-detail" key={active.name} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: .35 }}>
-          <div className="service-number">YOUR ASSISTANT / {active.id}</div>
-          <h2>{active.name}</h2>
-          <p>{active.line}</p>
-          <ul>{active.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-          <a href="#contact">Hand this off <ArrowUpRight /></a>
-        </motion.article>
-      </AnimatePresence>
+    <div className="section-head"><p className="kicker">02 / ALLO SERVICES</p><p>Four clear ways to take recurring work off your desk.</p></div>
+    <div className="service-intro">
+      <h2>WHAT CAN AN<br /><em>ALLO ASSISTANT</em><br />HANDLE?</h2>
+      <p>Dedicated virtual assistance shaped around the work already repeating in your business. Start with one area, then combine support as the role becomes clear.</p>
     </div>
+    <div className="service-cards" id="services" aria-label="Allo Society virtual assistant services">
+      {supportAreas.map((area, index) => <article key={area.name} className={`service-card ${selected === index ? 'active' : ''}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)}>
+        <div className="service-card-top"><span>{area.id}</span><span>ALLO / SERVICE</span></div>
+        <h3>{area.name}</h3>
+        <p>{area.line}</p>
+        <ul>{area.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+        <a href={`${import.meta.env.BASE_URL}services/${area.slug}/`}>Explore {area.shortName.toLowerCase()} support <ArrowUpRight /></a>
+      </article>)}
+    </div>
+    <AnimatePresence mode="wait">
+      <motion.aside className="service-answer" key={active.name} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} aria-live="polite">
+        <span>DIRECT ANSWER / {active.id}</span>
+        <div><h3>What does {active.name.toLowerCase()} include?</h3><p>{active.answer}</p></div>
+        <div><h3>Who is it for?</h3><p>{active.bestFor}</p></div>
+      </motion.aside>
+    </AnimatePresence>
   </section>
 }
 
@@ -116,7 +118,7 @@ function Delegation() {
     }, ref)
     return () => ctx.revert()
   }, [])
-  return <section className="talent-section" id="services" ref={ref}>
+  return <section className="talent-section" id="workday" ref={ref}>
     <div className="talent-copy"><p className="kicker">03 / A WORKDAY WITH BACKUP</p><h2>One assistant. Built around <em>your work.</em></h2><p>Your assistant learns the tools, routines, and details that keep your business moving. You keep the decisions. They keep the recurring work under control.</p></div>
     <div className="work-stack" aria-label="Examples of delegated work">
       <article className="work-card work-0"><Inbox /><small>08:15 / INBOX</small><h3>12 messages sorted</h3><p>Three replies drafted. Two follow-ups scheduled. Nothing urgent missed.</p><span><Check /> DONE BEFORE YOUR FIRST CALL</span></article>

@@ -23,8 +23,8 @@
 
 ## Information architecture
 - Primary navigation: Home, Solutions, Services, Our Work, Resources, Pricing, About
-- Core routes/screens: Single-page prototype
-- Content hierarchy: Time-back positioning, solutions, services, selected work from What Matters Built, setup process, resources, pricing guidance, brand story, CTA
+- Core routes/screens: Landing page plus four crawlable service-detail pages for inbox, calendar, operations, and customer support
+- Content hierarchy: Time-back positioning, explicit service cards, direct answers, selected work from What Matters Built, setup process, resources, pricing guidance, brand story, CTA
 
 ## Design principles
 - Transformation over decoration: Motion shows recurring work moving off the founder's desk
@@ -43,7 +43,7 @@
 
 ## Components
 - Existing components to reuse: None
-- New/changed components: Active-section navigation, support-area constellation, delegated-work stack, image-led selected-work reel with on-site case-study panel, setup process rail, resource browser, support-level selector, about statement, CTA
+- New/changed components: Active-section navigation, interactive service-card index, answer panel, service-detail page template, delegated-work stack, image-led selected-work reel with on-site case-study panel, setup process rail, resource browser, support-level selector, about statement, CTA
 - Variants and states: Rest, hover/focus, active section, selected project/solution/resource/support level, open case study, open mobile menu, reduced-motion
 - Token/component ownership: CSS custom properties in `src/styles.css`
 
@@ -56,7 +56,7 @@
 
 ## Responsive behavior
 - Supported breakpoints/devices: 320, 768, 1024, 1440 px
-- Layout adaptations: Constellation becomes a vertical selector; overlapping portraits become a compact stack
+- Layout adaptations: Four-column service index becomes full-width stacked cards; overlapping work cards become a compact stack
 - Touch/hover differences: Pointer follower and magnetic movement are removed on coarse pointers
 
 ## Interaction states
