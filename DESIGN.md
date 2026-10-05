@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Draft
-- Last refreshed: 2026-09-12
+- Last refreshed: 2026-10-05
 - Primary product surfaces: Allo Assistant landing page prototype
 - Evidence reviewed: `Allo_Society_Website_Master_Brief.md`; `Allo.Society Brand Identity System.zip`; Warhol Arts, amo.co, Oddly Made, Readymag Ancient Artifacts, and Yaara Israeli references
 
@@ -22,9 +22,9 @@
 - Key contexts of use: Desktop research, laptop presentations, mobile discovery
 
 ## Information architecture
-- Primary navigation: Support, What we handle, Process, Contact
+- Primary navigation: Home, Solutions, Services, Our Work, Resources, Pricing, About
 - Core routes/screens: Single-page prototype
-- Content hierarchy: Time-back positioning, support areas, delegated work, managed setup, CTA
+- Content hierarchy: Time-back positioning, solutions, services, work examples, resources, pricing guidance, brand story, CTA
 
 ## Design principles
 - Transformation over decoration: Motion shows recurring work moving off the founder's desk
@@ -42,8 +42,8 @@
 
 ## Components
 - Existing components to reuse: None
-- New/changed components: Navigation, support-area constellation, delegated-work stack, setup process rail, CTA
-- Variants and states: Rest, hover/focus, selected service, reduced-motion
+- New/changed components: Active-section navigation, support-area constellation, delegated-work stack, setup process rail, resource browser, support-level selector, about statement, CTA
+- Variants and states: Rest, hover/focus, active section, selected solution/resource/support level, open mobile menu, reduced-motion
 - Token/component ownership: CSS custom properties in `src/styles.css`
 
 ## Accessibility

@@ -8,18 +8,35 @@ import { supportAreas } from './data'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const navigation = [
+  { label: 'Home', href: '#top', target: 'top' },
+  { label: 'Solutions', href: '#support', target: 'support' },
+  { label: 'Services', href: '#services', target: 'services' },
+  { label: 'Our Work', href: '#process', target: 'process' },
+  { label: 'Resources', href: '#resources', target: 'resources' },
+  { label: 'Pricing', href: '#pricing', target: 'pricing' },
+  { label: 'About', href: '#about', target: 'about' },
+]
+
 function Header() {
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState('top')
+  useEffect(() => {
+    const sections = navigation.map(item => document.getElementById(item.target)).filter(Boolean) as HTMLElement[]
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+      if (visible) setActive(visible.target.id)
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, .15, .4] })
+    sections.forEach(section => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
   return <header className="site-header">
     <a className="wordmark" href="#top" aria-label="Allo Society home"><img src={`${import.meta.env.BASE_URL}brand/allo-society-wordmark-allcaps.svg`} alt="Allo Society" /></a>
     <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">
       {open ? <X /> : <Menu />}
     </button>
     <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
-      <a href="#support" onClick={() => setOpen(false)}>Support</a>
-      <a href="#tasks" onClick={() => setOpen(false)}>What we handle</a>
-      <a href="#process" onClick={() => setOpen(false)}>Process</a>
-      <a className="nav-cta" href="#contact" onClick={() => setOpen(false)}>Find an assistant <ArrowUpRight /></a>
+      {navigation.map(item => <a key={item.target} href={item.href} className={active === item.target ? 'active' : ''} aria-current={active === item.target ? 'page' : undefined} onClick={() => setOpen(false)}>{item.label}</a>)}
     </nav>
   </header>
 }
@@ -99,7 +116,7 @@ function Delegation() {
     }, ref)
     return () => ctx.revert()
   }, [])
-  return <section className="talent-section" id="tasks" ref={ref}>
+  return <section className="talent-section" id="services" ref={ref}>
     <div className="talent-copy"><p className="kicker">03 / A WORKDAY WITH BACKUP</p><h2>One assistant. Built around <em>your work.</em></h2><p>Your assistant learns the tools, routines, and details that keep your business moving. You keep the decisions. They keep the recurring work under control.</p></div>
     <div className="work-stack" aria-label="Examples of delegated work">
       <article className="work-card work-0"><Inbox /><small>08:15 / INBOX</small><h3>12 messages sorted</h3><p>Three replies drafted. Two follow-ups scheduled. Nothing urgent missed.</p><span><Check /> DONE BEFORE YOUR FIRST CALL</span></article>
@@ -120,9 +137,68 @@ function Process() {
   </section>
 }
 
+const resources = [
+  { title: 'Delegation audit', meta: '05 MIN', description: 'A quick way to spot the repeatable work that should leave your desk first.' },
+  { title: 'First-week brief', meta: 'TEMPLATE', description: 'The practical context, access, and priorities your assistant needs before day one.' },
+  { title: 'Inbox handoff', meta: 'GUIDE', description: 'A simple structure for triage, draft replies, escalation, and daily follow-up.' },
+]
+
+function Resources() {
+  const [selected, setSelected] = useState(0)
+  const active = resources[selected]
+  return <section className="resources-section" id="resources">
+    <div className="section-head"><p className="kicker">05 / RESOURCES</p><p>Useful before you delegate.</p></div>
+    <div className="resource-layout">
+      <div className="resource-intro"><h2>Start with<br /><em>clarity.</em></h2><p>Good support begins with a clear handoff. These short resources help you decide what to delegate and how to set it up.</p></div>
+      <div className="resource-browser">
+        <div className="resource-list" role="list" aria-label="Allo Society resources">
+          {resources.map((resource, index) => <button key={resource.title} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} onMouseEnter={() => setSelected(index)} aria-pressed={selected === index}>
+            <span>0{index + 1}</span><strong>{resource.title}</strong><small>{resource.meta}</small>
+          </button>)}
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div className="resource-detail" key={active.title} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }}>
+            <span>ALLO / FIELD NOTE</span><h3>{active.title}</h3><p>{active.description}</p><a href="#contact">Request this resource <ArrowUpRight /></a>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  </section>
+}
+
+const supportLevels = [
+  { hours: '10', label: 'Focused', copy: 'A precise starting point for a defined list of recurring tasks.' },
+  { hours: '20', label: 'Steady', copy: 'Reliable weekly coverage across admin, follow-up, and coordination.' },
+  { hours: '40', label: 'Dedicated', copy: 'Full working-week support for a business with consistent operational needs.' },
+]
+
+function Pricing() {
+  const [selected, setSelected] = useState(1)
+  const active = supportLevels[selected]
+  return <section className="pricing-section" id="pricing">
+    <div className="section-head light"><p className="kicker">06 / PRICING</p><p>Choose the rhythm, then shape the role.</p></div>
+    <div className="pricing-layout">
+      <div><span className="pricing-eyebrow">HOURS / WEEK</span><div className="hours-selector" role="group" aria-label="Weekly support hours">
+        {supportLevels.map((level, index) => <button key={level.hours} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} aria-pressed={selected === index}>{level.hours}</button>)}
+      </div></div>
+      <AnimatePresence mode="wait"><motion.article className="pricing-copy" key={active.hours} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+        <span>{active.label} support</span><h2>{active.hours}<small> hrs</small></h2><p>{active.copy}</p><a href="#contact">Request a tailored estimate <ArrowUpRight /></a>
+      </motion.article></AnimatePresence>
+    </div>
+  </section>
+}
+
+function About() {
+  return <section className="about-section" id="about">
+    <div className="section-head"><p className="kicker">07 / ABOUT ALLO</p><p>Bali based. Internationally minded.</p></div>
+    <div className="about-statement"><span>Born in Bali.</span><strong>Built for busy teams</strong><em>everywhere.</em></div>
+    <div className="about-foot"><p>Allo Society gives founders and small teams dedicated virtual support without turning delegation into another job.</p><a href="#contact">Say Allo <ArrowUpRight /></a></div>
+  </section>
+}
+
 function Contact() {
   return <footer className="contact" id="contact">
-    <p className="kicker">05 / SAY ALLO</p>
+    <p className="kicker">08 / SAY ALLO</p>
     <h2>FIND<br /><span>YOUR</span><br />ASSISTANT.</h2>
     <a className="contact-button" href="mailto:hello@allosociety.co">hello@allosociety.co <ArrowUpRight /></a>
     <div className="footer-line"><span>ALLO SOCIETY © 2026</span><span>VIRTUAL SUPPORT FROM BALI</span><a href="#top">BACK TO TOP ↑</a></div>
@@ -146,5 +222,5 @@ export function App() {
     window.addEventListener('pointermove', move)
     return () => window.removeEventListener('pointermove', move)
   }, [])
-  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><Process /></main><Contact /></>
+  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><Process /><Resources /><Pricing /><About /></main><Contact /></>
 }
