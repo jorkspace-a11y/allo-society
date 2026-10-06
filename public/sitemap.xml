@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://jorkspace-a11y.github.io/allo-society/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/inbox-management/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/calendar-scheduling/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/operations-support/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/customer-support/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/administration-operations/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/websites/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/social-media/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/digital-ads/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/crm-automation/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/dashboards/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://jorkspace-a11y.github.io/allo-society/services/internal-tools-erp/</loc><lastmod>2026-10-06</lastmod></url>
 </urlset>

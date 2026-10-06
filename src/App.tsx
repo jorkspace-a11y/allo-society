@@ -4,17 +4,16 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { supportAreas } from './data'
+import { coreAdminServices, serviceGroups, supportModels } from './data'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const navigation = [
   { label: 'Home', href: '#top', target: 'top' },
-  { label: 'Solutions', href: '#support', target: 'support' },
   { label: 'Services', href: '#services', target: 'services' },
-  { label: 'Our Work', href: '#work', target: 'work' },
-  { label: 'Resources', href: '#resources', target: 'resources' },
-  { label: 'Pricing', href: '#pricing', target: 'pricing' },
+  { label: 'Why Allo', href: '#why-allo', target: 'why-allo' },
+  { label: 'How It Works', href: '#process', target: 'process' },
+  { label: 'Work', href: '#work', target: 'work' },
   { label: 'About', href: '#about', target: 'about' },
 ]
 
@@ -37,6 +36,7 @@ function Header() {
     </button>
     <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
       {navigation.map(item => <a key={item.target} href={item.href} className={active === item.target ? 'active' : ''} aria-current={active === item.target ? 'page' : undefined} onClick={() => setOpen(false)}>{item.label}</a>)}
+      <a className="find-allo-link" href="#contact" onClick={() => setOpen(false)}>Find your Allo ↗</a>
     </nav>
   </header>
 }
@@ -52,7 +52,7 @@ function Hero() {
     return () => ctx.revert()
   }, [])
   return <section className="hero" id="top" ref={ref}>
-    <div className="hero-meta"><span>Dedicated virtual assistance</span><span>Bali ↗ Your workday</span></div>
+    <div className="hero-meta"><span>Dedicated virtual assistants from Bali for founders and small teams</span><span>Bali ↗ Worldwide</span></div>
     <h1>
       <span className="hero-line"><span className="hero-word-people">YOUR TIME</span></span>
       <span className="hero-line offset"><span>BELONGS</span></span>
@@ -60,7 +60,7 @@ function Hero() {
     </h1>
     <div className="hero-orbit" aria-hidden="true"><span>RIGHT SUPPORT • RIGHT TIME • </span></div>
     <p className="hero-note">A dedicated Allo Assistant handles the recurring work, so you can stay focused on the decisions only you can make.</p>
-    <a className="scroll-cue" href="#positioning"><ArrowDownRight /> SEE WHAT TO HAND OFF</a>
+    <div className="hero-actions"><a className="primary-cue" href="#contact">FIND YOUR ALLO <ArrowUpRight /></a><a className="scroll-cue" href="#services"><ArrowDownRight /> SEE WHAT WE HANDLE</a></div>
   </section>
 }
 
@@ -73,7 +73,7 @@ function Positioning() {
     }, ref)
     return () => ctx.revert()
   }, [])
-  return <section className="positioning" id="positioning" ref={ref}>
+  return <section className="positioning" id="why-allo" ref={ref}>
     <p className="kicker">01 / THE POINT</p>
     <div className="position-lines" aria-label="Your inbox should not be your second job. Hand off what keeps repeating.">
       <div className="line-a">YOUR INBOX IS NOT YOUR <i>SECOND JOB.</i></div>
@@ -84,29 +84,40 @@ function Positioning() {
 
 function ServiceSystem() {
   const [selected, setSelected] = useState(0)
-  const active = supportAreas[selected]
+  const active = serviceGroups[selected]
   return <section className="services-section" id="support">
-    <div className="section-head"><p className="kicker">02 / ALLO SERVICES</p><p>Four clear ways to take recurring work off your desk.</p></div>
+    <div className="section-head"><p className="kicker">02 / SERVICES</p><p>Recurring support and specialist execution.</p></div>
     <div className="service-intro">
-      <h2>WHAT CAN AN<br /><em>ALLO ASSISTANT</em><br />HANDLE?</h2>
-      <p>Dedicated virtual assistance shaped around the work already repeating in your business. Start with one area, then combine support as the role becomes clear.</p>
+      <h2>ONE BUSINESS.<br /><em>A LOT OF WORK.</em></h2>
+      <p>ALLO. handles recurring operational work and steps further into digital, automation, reporting, and internal systems when the business needs more than day-to-day administration.</p>
     </div>
-    <div className="service-cards" id="services" aria-label="Allo Society virtual assistant services">
-      {supportAreas.map((area, index) => <article key={area.name} className={`service-card ${selected === index ? 'active' : ''}`} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)}>
-        <div className="service-card-top"><span>{area.id}</span><span>ALLO / SERVICE</span></div>
-        <h3>{area.name}</h3>
-        <p>{area.line}</p>
-        <ul>{area.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-        <a href={`${import.meta.env.BASE_URL}services/${area.slug}/`}>Explore {area.shortName.toLowerCase()} support <ArrowUpRight /></a>
-      </article>)}
+    <div className="capability-switch" id="services" role="tablist" aria-label="Allo Society capability groups">
+      {serviceGroups.map((group, index) => <button key={group.name} role="tab" aria-selected={selected === index} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)}>
+        <span>{group.id}</span><strong>{group.name}.</strong><em>{group.line}</em>
+      </button>)}
     </div>
     <AnimatePresence mode="wait">
-      <motion.aside className="service-answer" key={active.name} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} aria-live="polite">
-        <span>DIRECT ANSWER / {active.id}</span>
-        <div><h3>What does {active.name.toLowerCase()} include?</h3><p>{active.answer}</p></div>
-        <div><h3>Who is it for?</h3><p>{active.bestFor}</p></div>
-      </motion.aside>
+      <motion.div className="capability-panel" key={active.name} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} aria-live="polite">
+        <div className="capability-answer"><span>WHAT {active.name} MEANS</span><p>{active.answer}</p></div>
+        <div className={`service-cards count-${active.services.length}`}>
+          {active.services.map(service => <article key={service.name} className="service-card">
+            <div className="service-card-top"><span>{active.name}.</span><span>ALLO / SERVICE</span></div>
+            <h3>{service.name}</h3>
+            <p>{service.line}</p>
+            <ul>{service.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+            <a href={`${import.meta.env.BASE_URL}services/${service.slug}/`}>Explore this service <ArrowUpRight /></a>
+          </article>)}
+        </div>
+        {active.name === 'RUN' && <div className="admin-scope"><span>ADMINISTRATION & OPERATIONS INCLUDES</span><ul>{coreAdminServices.map(item => <li key={item}>{item}</li>)}</ul></div>}
+      </motion.div>
     </AnimatePresence>
+    <div className="broader-transition"><span>THE WORK</span><strong>DOESN'T STOP</strong><em>AT YOUR INBOX.</em><p>As a business grows, support rarely stays inside admin. A campaign needs managing. A CRM needs cleaning up. Reporting needs structure. A website needs finishing. That is where ALLO. can go further.</p></div>
+    <div className="support-models" aria-label="Allo Society support models">
+      <div className="support-models-head"><span>THE SUPPORT MODEL</span><h2>THE RIGHT ALLO.<br />FOR THE WORK.</h2></div>
+      <div className="support-model-grid">{supportModels.map(model => <article key={model.name}>
+        <span>{model.id}</span><h3>{model.name}</h3><strong>{model.line}</strong><p>{model.fit}</p><a href="#contact">Find your Allo <ArrowUpRight /></a>
+      </article>)}</div>
+    </div>
   </section>
 }
 
@@ -291,23 +302,23 @@ function Resources() {
   </section>
 }
 
-const supportLevels = [
-  { hours: '10', label: 'Focused', copy: 'A precise starting point for a defined list of recurring tasks.' },
-  { hours: '20', label: 'Steady', copy: 'Reliable weekly coverage across admin, follow-up, and coordination.' },
-  { hours: '40', label: 'Dedicated', copy: 'Full working-week support for a business with consistent operational needs.' },
+const commercialModels = [
+  { id: '01', name: 'Monthly Support', label: 'Recurring capacity', copy: 'For ongoing administration, social media, digital ads support, CRM maintenance, and recurring reporting.' },
+  { id: '02', name: 'Fixed Project', label: 'Defined scope', copy: 'For landing pages, websites, dashboards, workflow design, and scoped internal systems work.' },
+  { id: '03', name: 'Custom ALLO.', label: 'Integrated support', copy: 'For mixed engagements that combine recurring support with specialist execution across the business.' },
 ]
 
 function Pricing() {
   const [selected, setSelected] = useState(1)
-  const active = supportLevels[selected]
+  const active = commercialModels[selected]
   return <section className="pricing-section" id="pricing">
-    <div className="section-head light"><p className="kicker">07 / PRICING</p><p>Choose the rhythm, then shape the role.</p></div>
+    <div className="section-head light"><p className="kicker">07 / WORKING TOGETHER</p><p>Priced for the work. Structured for the relationship.</p></div>
     <div className="pricing-layout">
-      <div><span className="pricing-eyebrow">HOURS / WEEK</span><div className="hours-selector" role="group" aria-label="Weekly support hours">
-        {supportLevels.map((level, index) => <button key={level.hours} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} aria-pressed={selected === index}>{level.hours}</button>)}
+      <div><span className="pricing-eyebrow">COMMERCIAL MODEL / SELECT ONE</span><div className="model-selector" role="group" aria-label="Allo Society commercial models">
+        {commercialModels.map((model, index) => <button key={model.id} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} aria-pressed={selected === index}><span>{model.id}</span><strong>{model.name}</strong></button>)}
       </div></div>
-      <AnimatePresence mode="wait"><motion.article className="pricing-copy" key={active.hours} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-        <span>{active.label} support</span><h2>{active.hours}<small> hrs</small></h2><p>{active.copy}</p><a href="#contact">Request a tailored estimate <ArrowUpRight /></a>
+      <AnimatePresence mode="wait"><motion.article className="pricing-copy" key={active.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+        <span>{active.label}</span><h2>{active.name}</h2><small>USD / TAILORED TO SCOPE</small><p>{active.copy}</p><a href="#contact">Request a tailored estimate <ArrowUpRight /></a>
       </motion.article></AnimatePresence>
     </div>
   </section>
@@ -324,8 +335,13 @@ function About() {
 function Contact() {
   return <footer className="contact" id="contact">
     <p className="kicker">09 / SAY ALLO</p>
-    <h2>FIND<br /><span>YOUR</span><br />ASSISTANT.</h2>
-    <a className="contact-button" href="mailto:hello@allosociety.co">hello@allosociety.co <ArrowUpRight /></a>
+    <div className="footer-opening"><span>ALLO.</span><h2>WORK,<br /><em>HANDLED.</em></h2></div>
+    <div className="footer-contact"><p>SOMETHING<br />NEEDS HANDLING?</p><a className="contact-button" href="mailto:hello@allosociety.co">hello@allosociety.co <ArrowUpRight /></a></div>
+    <div className="footer-columns">
+      <div><strong>ALLO. SOCIETY</strong><span>Virtual assistance and specialist business support.</span><span>Bali, Indonesia / Working remotely</span></div>
+      <div><strong>SERVICES</strong><a href="#services">Run / Grow / Build</a><a href="#work">Selected work</a><a href="#pricing">Ways to work together</a></div>
+      <div><strong>SUPPORT</strong><a href="#support">Allo Assistant</a><a href="#support">Allo Executive</a><a href="#support">Allo Specialist</a></div>
+    </div>
     <div className="footer-line"><span>ALLO SOCIETY © 2026</span><span>VIRTUAL SUPPORT FROM BALI</span><a href="#top">BACK TO TOP ↑</a></div>
   </footer>
 }

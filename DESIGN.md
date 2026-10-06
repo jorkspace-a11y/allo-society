@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Draft
-- Last refreshed: 2026-10-05
+- Last refreshed: 2026-10-06
 - Primary product surfaces: Allo Assistant landing page prototype
 - Evidence reviewed: `Allo_Society_Website_Master_Brief.md`; `Allo.Society Brand Identity System.zip`; Warhol Arts, amo.co, Oddly Made, Readymag Ancient Artifacts, and Yaara Israeli references; real project content and imagery from the What Matters Built portfolio
 
@@ -22,9 +22,9 @@
 - Key contexts of use: Desktop research, laptop presentations, mobile discovery
 
 ## Information architecture
-- Primary navigation: Home, Solutions, Services, Our Work, Resources, Pricing, About
-- Core routes/screens: Landing page plus four crawlable service-detail pages for inbox, calendar, operations, and customer support
-- Content hierarchy: Time-back positioning, explicit service cards, direct answers, selected work from What Matters Built, setup process, resources, pricing guidance, brand story, CTA
+- Primary navigation: Home, Services, Why Allo, How It Works, Work, About, plus the Find Your Allo CTA
+- Core routes/screens: Compact landing page plus seven crawlable top-level service pages; administration sub-services remain nested rather than flattened into separate top-level offers
+- Content hierarchy: Time-back positioning, RUN/GROW/BUILD capability system, Allo Assistant/Executive/Specialist support model, direct answers, selected work from What Matters Built, setup process, resources, Monthly Support/Fixed Project/Custom ALLO. commercial models, brand story, CTA
 
 ## Design principles
 - Transformation over decoration: Motion shows recurring work moving off the founder's desk
@@ -43,8 +43,8 @@
 
 ## Components
 - Existing components to reuse: None
-- New/changed components: Active-section navigation, interactive service-card index, answer panel, service-detail page template, delegated-work stack, image-led selected-work reel with on-site case-study panel, setup process rail, resource browser, support-level selector, about statement, CTA
-- Variants and states: Rest, hover/focus, active section, selected project/solution/resource/support level, open case study, open mobile menu, reduced-motion
+- New/changed components: Active-section navigation, RUN/GROW/BUILD capability switch, service index, support-model cards, answer-led service-page template, delegated-work stack, image-led selected-work reel with on-site case-study panel, setup process rail, resource browser, commercial-model selector, about statement, editorial footer CTA
+- Variants and states: Rest, hover/focus, active section, selected project/solution/resource/commercial model, open case study, open mobile menu, reduced-motion
 - Token/component ownership: CSS custom properties in `src/styles.css`
 
 ## Accessibility
