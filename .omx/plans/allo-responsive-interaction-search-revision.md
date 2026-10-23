@@ -1,7 +1,7 @@
 # Allo Society revision plan
 
 Date: 2026-10-23
-Status: Implementation authorized and in progress. Responsive, branding, interaction and on-site search revisions implemented; release verification is recorded in `docs/REVISION-QA-2026-10-23.md`.
+Status: Implemented, published and live-verified on 23 October 2026. Responsive, branding, interaction and on-site search revisions are complete within the documented browser coverage. Search-account measurement, off-site authority and additional physical-device/browser-engine validation remain explicitly unverified. Release evidence is recorded in `docs/REVISION-QA-2026-10-23.md`.
 
 ## Outcome and requirements
 

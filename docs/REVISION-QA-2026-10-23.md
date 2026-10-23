@@ -4,7 +4,9 @@
 
 User-authorized fixes: supplied logo placement, overlapping hero copy, responsive layouts, interactive support cards, and the PDF-based on-site search foundation. The managed virtual-assistance offer and existing on-site portfolio are preserved.
 
-Previous source: `96eb6aa`. Previous Pages revision: `417120d5969df7b83fbf3807ecd469988cfb740c`. Release status: local verification complete; deployment verification will be appended after publishing.
+Previous source: `96eb6aa`. Previous Pages revision: `417120d5969df7b83fbf3807ecd469988cfb740c`. Release status: published and verified. Implementation source: `7838c85`. GitHub Pages revision: `a1d5078c7e7f6eb323e31e83d0ad6eaa93fa5402`, reported built at 08:03:16 UTC on 23 October 2026.
+
+The live HTML serves the expected `index-C5irzc4e.js` and `index-Dzk6kloD.css` assets. Both outlined brand assets return 200 with no font-dependent `<text>` elements. Live sitemap contains all eight canonical URLs with 2026-10-23 modification dates. The 12-width homepage check, 84 service-page checks, and 48 interaction/reflow checks were repeated successfully on the live deployment. No service-page runtime errors were recorded. Live hero and support-card screenshots were visually inspected.
 
 ## Results
 
@@ -29,8 +31,10 @@ Single Lighthouse 13.5.0 runs, default simulated mobile or desktop preset:
 | Previous live, desktop | 68 | 91 | 100 | 100 | 2.5s | 0.003 |
 | Revised local production preview, mobile | 79 | 100 | 100 | 100 | 3.3s | 0.027 |
 | Revised local production preview, desktop | 100 | 100 | 100 | 100 | 0.6s | 0.004 |
+| Revised live, mobile | 92 | 100 | 100 | 100 | 2.5s | 0.027 |
+| Revised live, desktop | 100 | 100 | 100 | 100 | 0.7s | 0.006 |
 
-Local-versus-live delivery and single-run variation prevent a valid speed-improvement claim. An earlier local mobile pass scored 84; the final local run scored 79. Font delivery/render blocking and the existing animation bundle remain performance follow-ups. Live post-deployment measurement will be recorded separately. These are lab measurements, not real-user Core Web Vitals.
+Local-versus-live delivery and single-run variation prevent a reliable speed-improvement claim. An earlier local mobile pass scored 84; the final local run scored 79. The post-deployment live mobile run scored 92. Font delivery/render blocking and the existing animation bundle remain performance follow-ups. These are lab measurements, not real-user Core Web Vitals.
 
 ## Evidence
 
@@ -41,6 +45,7 @@ Local artifacts are in the ignored `output/playwright/` folder:
 - `final-cards-desktop.png`, `final-cards-mobile.png`, `revision-menu-reduce.png`
 - `revision-service-mobile.png`, `revision-service-desktop.png`, `revision-footer-mobile.png`
 - `lighthouse-before-mobile.json`, `lighthouse-before-desktop.json`, `lighthouse-after-mobile.json`, `lighthouse-after-desktop.json`
+- Live evidence: `live-hero-390.png`, `live-hero-768.png`, `live-hero-1366.png`, `live-hero-3440.png`, `live-cards-desktop.png`, `live-cards-mobile.png`, `live-service-mobile.png`, `live-service-desktop.png`, `live-menu-reduce.png`, `lighthouse-live-mobile.json`, `lighthouse-live-desktop.json`.
 
 Hero, card, menu, service-page and footer screenshots were visually inspected. Element-only tall screenshots can include the fixed header partway through the crop; viewport screenshots are used to judge actual placement.
 
