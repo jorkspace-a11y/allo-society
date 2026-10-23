@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowDownRight, ArrowUpRight, CalendarDays, Check, Inbox, Menu, RefreshCw, X } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -20,6 +20,27 @@ const navigation = [
 function Header() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('top')
+  const menuRef = useRef<HTMLButtonElement>(null)
+  const navRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    if (!open) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const close = () => { setOpen(false); menuRef.current?.focus() }
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') close()
+      if (event.key === 'Tab') {
+        const links = navRef.current?.querySelectorAll<HTMLAnchorElement>('a')
+        const last = links?.[links.length - 1]
+        if (event.shiftKey && document.activeElement === menuRef.current) { event.preventDefault(); last?.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); menuRef.current?.focus() }
+      }
+    }
+    const resize = () => { if (window.innerWidth > 1050) setOpen(false) }
+    window.addEventListener('keydown', keyboard)
+    window.addEventListener('resize', resize)
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', keyboard); window.removeEventListener('resize', resize) }
+  }, [open])
   useEffect(() => {
     const sections = navigation.map(item => document.getElementById(item.target)).filter(Boolean) as HTMLElement[]
     const observer = new IntersectionObserver(entries => {
@@ -30,11 +51,11 @@ function Header() {
     return () => observer.disconnect()
   }, [])
   return <header className="site-header">
-    <a className="wordmark" href="#top" aria-label="Allo Society home"><img src={`${import.meta.env.BASE_URL}brand/allo-society-wordmark-allcaps.svg`} alt="Allo Society" /></a>
-    <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Toggle navigation">
+    <a className="wordmark" href="#top" aria-label="Allo Society home" onClick={() => setOpen(false)}><img src={`${import.meta.env.BASE_URL}brand/allo-header-outlined.svg`} width="126" height="56" alt="Allo Society" /></a>
+    <button ref={menuRef} className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-nav" aria-label={open ? 'Close navigation' : 'Open navigation'}>
       {open ? <X /> : <Menu />}
     </button>
-    <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
+    <nav ref={navRef} id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
       {navigation.map(item => <a key={item.target} href={item.href} className={active === item.target ? 'active' : ''} aria-current={active === item.target ? 'page' : undefined} onClick={() => setOpen(false)}>{item.label}</a>)}
       <a className="find-allo-link" href="#contact" onClick={() => setOpen(false)}>Find your Allo ↗</a>
     </nav>
@@ -44,22 +65,21 @@ function Header() {
 function Hero() {
   const ref = useRef<HTMLElement>(null)
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const ctx = gsap.context(() => {
       gsap.from('.hero-line span', { yPercent: 115, rotate: 3, duration: 1.1, stagger: .08, ease: 'power4.out' })
-      gsap.to('.hero-word-people', { letterSpacing: '-.075em', scrollTrigger: { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: 1 } })
-      gsap.to('.hero-orbit', { rotate: 65, yPercent: -25, scrollTrigger: { trigger: ref.current, start: 'top top', end: 'bottom top', scrub: 1 } })
     }, ref)
     return () => ctx.revert()
   }, [])
   return <section className="hero" id="top" ref={ref}>
     <div className="hero-meta"><span>Dedicated virtual assistants from Bali for founders and small teams</span><span>Bali ↗ Worldwide</span></div>
-    <h1>
+    <div className="hero-composition"><h1>
       <span className="hero-line"><span className="hero-word-people">YOUR TIME</span></span>
       <span className="hero-line offset"><span>BELONGS</span></span>
       <span className="hero-line"><span>ELSEWHERE.</span></span>
     </h1>
-    <div className="hero-orbit" aria-hidden="true"><span>RIGHT SUPPORT • RIGHT TIME • </span></div>
-    <p className="hero-note">A dedicated Allo Assistant handles the recurring work, so you can stay focused on the decisions only you can make.</p>
+    <aside className="hero-aside"><div className="hero-orbit" aria-hidden="true"><span>BALI → YOUR TEAM</span></div>
+    <p className="hero-note">Inbox, schedules, follow-ups. Hand over the work that keeps pulling you away.</p></aside></div>
     <div className="hero-actions"><a className="primary-cue" href="#contact">FIND YOUR ALLO <ArrowUpRight /></a><a className="scroll-cue" href="#services"><ArrowDownRight /> SEE WHAT WE HANDLE</a></div>
   </section>
 }
@@ -67,11 +87,12 @@ function Hero() {
 function Positioning() {
   const ref = useRef<HTMLElement>(null)
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const media = gsap.matchMedia()
+    media.add('(min-width: 1051px) and (prefers-reduced-motion: no-preference)', () => {
       gsap.fromTo('.positioning .line-a', { xPercent: -18 }, { xPercent: 5, scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 } })
       gsap.fromTo('.positioning .line-b', { xPercent: 14 }, { xPercent: -5, scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: 1 } })
     }, ref)
-    return () => ctx.revert()
+    return () => media.revert()
   }, [])
   return <section className="positioning" id="why-allo" ref={ref}>
     <p className="kicker">01 / THE POINT</p>
@@ -84,7 +105,7 @@ function Positioning() {
 
 function ServiceSystem() {
   const [selected, setSelected] = useState(0)
-  const active = serviceGroups[selected]
+  const [selectedModel, setSelectedModel] = useState(0)
   return <section className="services-section" id="support">
     <div className="section-head"><p className="kicker">02 / SERVICES</p><p>Recurring support and specialist execution.</p></div>
     <div className="service-intro">
@@ -92,12 +113,14 @@ function ServiceSystem() {
       <p>ALLO. handles recurring operational work and steps further into digital, automation, reporting, and internal systems when the business needs more than day-to-day administration.</p>
     </div>
     <div className="capability-switch" id="services" role="tablist" aria-label="Allo Society capability groups">
-      {serviceGroups.map((group, index) => <button key={group.name} role="tab" aria-selected={selected === index} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)}>
+      {serviceGroups.map((group, index) => <button key={group.name} id={`group-${group.name}`} role="tab" aria-controls={`panel-${group.name}`} tabIndex={selected === index ? 0 : -1} aria-selected={selected === index} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onKeyDown={event => {
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : event.key === 'ArrowRight' ? (index + 1) % 3 : event.key === 'ArrowLeft' ? (index + 2) % 3 : -1
+        if (next >= 0) { event.preventDefault(); setSelected(next); document.getElementById(`group-${serviceGroups[next].name}`)?.focus() }
+      }}>
         <span>{group.id}</span><strong>{group.name}.</strong><em>{group.line}</em>
       </button>)}
     </div>
-    <AnimatePresence mode="wait">
-      <motion.div className="capability-panel" key={active.name} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} aria-live="polite">
+    {serviceGroups.map((active, index) => <div className="capability-panel" key={active.name} id={`panel-${active.name}`} role="tabpanel" aria-labelledby={`group-${active.name}`} hidden={selected !== index}>
         <div className="capability-answer"><span>WHAT {active.name} MEANS</span><p>{active.answer}</p></div>
         <div className={`service-cards count-${active.services.length}`}>
           {active.services.map(service => <article key={service.name} className="service-card">
@@ -109,13 +132,16 @@ function ServiceSystem() {
           </article>)}
         </div>
         {active.name === 'RUN' && <div className="admin-scope"><span>ADMINISTRATION & OPERATIONS INCLUDES</span><ul>{coreAdminServices.map(item => <li key={item}>{item}</li>)}</ul></div>}
-      </motion.div>
-    </AnimatePresence>
+      </div>)}
     <div className="broader-transition"><span>THE WORK</span><strong>DOESN'T STOP</strong><em>AT YOUR INBOX.</em><p>As a business grows, support rarely stays inside admin. A campaign needs managing. A CRM needs cleaning up. Reporting needs structure. A website needs finishing. That is where ALLO. can go further.</p></div>
-    <div className="support-models" aria-label="Allo Society support models">
+    <div className="support-models" id="support-models" aria-label="Allo Society support models">
       <div className="support-models-head"><span>THE SUPPORT MODEL</span><h2>THE RIGHT ALLO.<br />FOR THE WORK.</h2></div>
-      <div className="support-model-grid">{supportModels.map(model => <article key={model.name}>
-        <span>{model.id}</span><h3>{model.name}</h3><strong>{model.line}</strong><p>{model.fit}</p><a href="#contact">Find your Allo <ArrowUpRight /></a>
+      <div className="support-model-grid">{supportModels.map((model, index) => <article key={model.name} className={selectedModel === index ? 'selected' : ''} onMouseEnter={() => setSelectedModel(index)}>
+        <span>{model.id}<span className="model-state">{selectedModel === index ? 'SELECTED' : 'EXPLORE'}</span></span>
+        <h3><button type="button" aria-label={model.name} aria-pressed={selectedModel === index} onClick={() => setSelectedModel(index)} onFocus={() => setSelectedModel(index)}><span>Allo</span>{model.name.replace('Allo ', '')}</button></h3>
+        <strong>{model.line}</strong><p>{model.fit}</p>
+        <div className="model-guidance" aria-live="polite">{selectedModel === index && <><span>START WITH</span><p>{model.start}</p></>}</div>
+        <a href={`mailto:hello@allosociety.co?subject=${encodeURIComponent(model.name + ' support')}`}>Find your Allo <ArrowUpRight /></a>
       </article>)}</div>
     </div>
   </section>
@@ -124,10 +150,11 @@ function ServiceSystem() {
 function Delegation() {
   const ref = useRef<HTMLElement>(null)
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const media = gsap.matchMedia()
+    media.add('(min-width: 1051px) and (prefers-reduced-motion: no-preference)', () => {
       gsap.from('.work-card', { y: 180, rotate: i => [-7, 4, 9][i], stagger: .12, scrollTrigger: { trigger: ref.current, start: 'top 70%', end: 'center center', scrub: 1 } })
     }, ref)
-    return () => ctx.revert()
+    return () => media.revert()
   }, [])
   return <section className="talent-section" id="workday" ref={ref}>
     <div className="talent-copy"><p className="kicker">03 / A WORKDAY WITH BACKUP</p><h2>One assistant. Built around <em>your work.</em></h2><p>Your assistant learns the tools, routines, and details that keep your business moving. You keep the decisions. They keep the recurring work under control.</p></div>
@@ -235,7 +262,7 @@ function OurWork() {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="work-browser" role="list" aria-label="Selected Allo Society work">
+      <div className="work-browser" role="group" aria-label="Selected Allo Society work">
         {workProjects.map((project, index) => <button key={project.name} className={selected === index ? 'active' : ''} onMouseEnter={() => setSelected(index)} onFocus={() => setSelected(index)} onClick={() => setSelected(index)} aria-pressed={selected === index}>
           <span className="work-index">0{index + 1}</span>
           <span className="work-entry"><small>{project.discipline} / {project.status}</small><strong>{project.name}</strong><em>{project.role}</em></span>
@@ -287,13 +314,13 @@ function Resources() {
     <div className="resource-layout">
       <div className="resource-intro"><h2>Start with<br /><em>clarity.</em></h2><p>Good support begins with a clear handoff. These short resources help you decide what to delegate and how to set it up.</p></div>
       <div className="resource-browser">
-        <div className="resource-list" role="list" aria-label="Allo Society resources">
+        <div className="resource-list" role="group" aria-label="Allo Society resources">
           {resources.map((resource, index) => <button key={resource.title} className={selected === index ? 'active' : ''} onClick={() => setSelected(index)} onMouseEnter={() => setSelected(index)} aria-pressed={selected === index}>
             <span>0{index + 1}</span><strong>{resource.title}</strong><small>{resource.meta}</small>
           </button>)}
         </div>
         <AnimatePresence mode="wait">
-          <motion.div className="resource-detail" key={active.title} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }}>
+          <motion.div className="resource-detail" key={active.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <span>ALLO / FIELD NOTE</span><h3>{active.title}</h3><p>{active.description}</p><a href="#contact">Request this resource <ArrowUpRight /></a>
           </motion.div>
         </AnimatePresence>
@@ -339,15 +366,14 @@ function Contact() {
     <div className="footer-contact"><p>SOMETHING<br />NEEDS HANDLING?</p><a className="contact-button" href="mailto:hello@allosociety.co">hello@allosociety.co <ArrowUpRight /></a></div>
     <div className="footer-columns">
       <div><strong>ALLO. SOCIETY</strong><span>Virtual assistance and specialist business support.</span><span>Bali, Indonesia / Working remotely</span></div>
-      <div><strong>SERVICES</strong><a href="#services">Run / Grow / Build</a><a href="#work">Selected work</a><a href="#pricing">Ways to work together</a></div>
-      <div><strong>SUPPORT</strong><a href="#support">Allo Assistant</a><a href="#support">Allo Executive</a><a href="#support">Allo Specialist</a></div>
+      <div><strong>SERVICES</strong>{serviceGroups.flatMap(group => group.services).map(service => <a key={service.slug} href={`${import.meta.env.BASE_URL}services/${service.slug}/`}>{service.name}</a>)}</div>
+      <div><strong>SUPPORT</strong><a href="#support-models">Allo Assistant</a><a href="#support-models">Allo Executive</a><a href="#support-models">Allo Specialist</a><a href="#work">Selected work</a><a href="#pricing">Ways to work together</a></div>
     </div>
     <div className="footer-line"><span>ALLO SOCIETY © 2026</span><span>VIRTUAL SUPPORT FROM BALI</span><a href="#top">BACK TO TOP ↑</a></div>
   </footer>
 }
 
 export function App() {
-  const cursor = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (!reduce) {
@@ -358,10 +384,5 @@ export function App() {
       return () => { cancelAnimationFrame(frame); lenis.destroy() }
     }
   }, [])
-  useEffect(() => {
-    const move = (event: PointerEvent) => { if (cursor.current) gsap.to(cursor.current, { x: event.clientX, y: event.clientY, duration: .18 }) }
-    window.addEventListener('pointermove', move)
-    return () => window.removeEventListener('pointermove', move)
-  }, [])
-  return <><div className="cursor" ref={cursor} aria-hidden="true" /><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><OurWork /><Process /><Resources /><Pricing /><About /></main><Contact /></>
+  return <MotionConfig reducedMotion="user"><Header /><main><Hero /><Positioning /><ServiceSystem /><Delegation /><OurWork /><Process /><Resources /><Pricing /><About /></main><Contact /></MotionConfig>
 }

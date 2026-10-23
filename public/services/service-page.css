@@ -9,4 +9,34 @@ main{overflow:hidden}.service-hero{min-height:88svh;padding:40px 24px 64px;displ
 .faq{padding:90px 24px}.faq h2{margin-bottom:55px}.faq-list{max-width:980px;margin-left:auto}.faq details{border-top:1px solid var(--line)}.faq details:last-child{border-bottom:1px solid var(--line)}.faq summary{padding:24px 48px 24px 0;cursor:pointer;font-size:clamp(1.2rem,2.2vw,2rem);line-height:1.25}.faq details p{max-width:760px;margin:0 0 28px;line-height:1.65;color:#c9c7c1}
 .cta{min-height:68svh;padding:28px 24px;background:var(--red);display:flex;flex-direction:column}.cta h2{margin:auto 0;font-size:clamp(4rem,12vw,12rem);line-height:.72;letter-spacing:-.09em;text-transform:uppercase}.cta a{align-self:flex-end;padding:14px 18px;border:1px solid;border-radius:100px;font:11px 'DM Mono',monospace}.footer{display:flex;justify-content:space-between;padding:14px 24px;background:var(--red);border-top:1px solid;font:9px 'DM Mono',monospace;text-transform:uppercase}
 @media(max-width:760px){.site-header{padding:14px 16px}.site-header nav a:not(:last-child){display:none}.service-hero{min-height:82svh;padding:32px 16px 48px}.service-hero h1{font-size:20vw}.service-hero h1 em{margin-left:4vw;-webkit-text-stroke-width:1px}.hero-foot,.answer,.scope-head,.fit{grid-template-columns:1fr}.hero-foot a{justify-self:start;margin-top:24px}.answer,.scope,.fit,.faq{padding:64px 16px}.answer{gap:35px}.task-list li{grid-template-columns:42px 1fr}.faq-list{margin-left:0}.cta{padding:24px 16px}.cta a{align-self:flex-start;margin-bottom:35px}.footer{padding:14px 16px}.footer span:last-child{display:none}}
+:root{--gutter:clamp(20px,3vw,56px);--inset:max(var(--gutter),calc((100vw - 1600px)/2))}
+html{scroll-padding-top:110px}
+:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.site-header{height:88px;padding:12px var(--inset);background:var(--ink);gap:20px}
+.site-header img{width:126px;height:56px;object-fit:contain}
+.site-header>a{flex-shrink:0}
+.site-header nav{align-items:center;gap:24px}
+.site-header nav a{display:flex;align-items:center;min-height:44px}
+main{overflow:visible}
+main>section[class],.related-services,.footer{padding-left:var(--inset);padding-right:var(--inset)}
+.crumbs{flex-wrap:wrap;line-height:1.6}
+.service-hero{min-height:min(82svh,900px);gap:64px}
+.service-hero h1{font-size:clamp(3rem,9vw,10rem);line-height:.9;letter-spacing:-.075em;overflow-wrap:anywhere}
+.service-hero h1 em{margin-left:6%}
+.answer,.scope-head,.fit,.hero-foot{gap:clamp(28px,4vw,64px);grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr)}
+.hero-foot,.fit{grid-template-columns:repeat(2,minmax(0,1fr))}
+.answer h2,.scope h2,.fit h2,.faq h2{font-size:clamp(2.3rem,5vw,5.5rem);line-height:1;overflow-wrap:anywhere}
+.task-list li{line-height:1.2;grid-template-columns:50px minmax(0,1fr)}
+.cta{min-height:500px;gap:48px}
+.cta h2{font-size:clamp(3rem,8.5vw,9rem);line-height:.95;overflow-wrap:anywhere}
+.cta a,.hero-foot a{min-height:44px;display:flex;align-items:center;max-width:100%;overflow-wrap:anywhere}
+.related-services{padding-top:48px;padding-bottom:64px;border-top:1px solid var(--line)}
+.related-services>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 24px;margin-top:24px}
+.related-services a{display:flex;align-items:center;min-height:44px;line-height:1.5;border-bottom:1px solid var(--line);padding-block:12px}
+.related-services a:hover{color:var(--red)}
+.proof-link{width:fit-content;margin-top:24px}
+.task-list span,.crumbs span{color:var(--paper)}
+.site-header nav a:hover,.site-header nav a:focus-visible,.related-services a:hover{color:var(--paper);text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:5px}
+@media(max-width:900px){.answer,.scope-head,.fit,.hero-foot{grid-template-columns:1fr}.related-services>div{grid-template-columns:repeat(2,minmax(0,1fr))}.site-header nav a:not(:last-child){display:none}.hero-foot a{justify-self:start}.scope h2,.fit h2,.faq h2{font-size:clamp(2.3rem,7vw,4.5rem)}}
+@media(max-width:600px){.service-hero{min-height:auto;gap:56px}.service-hero h1{font-size:clamp(2.7rem,12.5vw,5rem)}.service-hero h1 em{margin-left:0}.answer,.scope,.fit,.faq{padding-block:56px}.answer h2{font-size:clamp(2rem,8vw,3.5rem)}.related-services>div{grid-template-columns:1fr}.site-header nav{font-size:9px}.cta{min-height:400px}.cta h2{font-size:clamp(2.5rem,12vw,4.5rem)}.task-list li{font-size:1.5rem;grid-template-columns:32px minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}

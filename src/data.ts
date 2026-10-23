@@ -86,18 +86,21 @@ export const supportModels = [
   {
     id: '01',
     name: 'Allo Assistant',
+    start: 'Bring your recurring task list. We agree what to handle, when to check in, and what needs your decision.',
     line: 'For recurring administrative and operational execution.',
     fit: 'Inbox, calendar, customer support, research, CRM updates, documentation, reporting support, and coordination.',
   },
   {
     id: '02',
     name: 'Allo Executive',
+    start: 'Start with priorities, calendar ownership, and who needs to stay informed. Agree access and escalation together.',
     line: 'For higher-trust support around founders, managers, and leadership.',
     fit: 'Executive coordination, calendar ownership, communication support, reporting, priorities, and stakeholder follow-up.',
   },
   {
     id: '03',
     name: 'Allo Specialist',
+    start: 'Bring a project or a workflow that needs fixing. We define the scope, inputs, and handover before work starts.',
     line: 'For deeper digital, marketing, systems, automation, and reporting work.',
     fit: 'Websites, social media, digital ads, CRM, automation, dashboards, internal tools, and ERP configuration.',
   },
