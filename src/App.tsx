@@ -5,6 +5,7 @@ import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { coreAdminServices, serviceGroups, supportModels } from './data'
+import { HeroSticker, StickerCollage } from './Stickers'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -78,7 +79,7 @@ function Hero() {
       <span className="hero-line offset"><span>BELONGS</span></span>
       <span className="hero-line"><span>ELSEWHERE.</span></span>
     </h1>
-    <aside className="hero-aside"><div className="hero-orbit" aria-hidden="true"><span>BALI → YOUR TEAM</span></div>
+    <aside className="hero-aside"><HeroSticker />
     <p className="hero-note">Inbox, schedules, follow-ups. Hand over the work that keeps pulling you away.</p></aside></div>
     <div className="hero-actions"><a className="primary-cue" href="#contact">FIND YOUR ALLO <ArrowUpRight /></a><a className="scroll-cue" href="#services"><ArrowDownRight /> SEE WHAT WE HANDLE</a></div>
   </section>
@@ -355,6 +356,7 @@ function About() {
   return <section className="about-section" id="about">
     <div className="section-head"><p className="kicker">08 / ABOUT ALLO</p><p>Bali based. Internationally minded.</p></div>
     <div className="about-statement"><span>Born in Bali.</span><strong>Built for busy teams</strong><em>everywhere.</em></div>
+    <StickerCollage />
     <div className="about-foot"><p>Allo Society gives founders and small teams dedicated virtual support without turning delegation into another job.</p><a href="#contact">Say Allo <ArrowUpRight /></a></div>
   </section>
 }

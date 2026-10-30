@@ -1,0 +1,35 @@
+.hero-sticker { width: 100%; max-width: 280px; align-self: center; }
+.sticker-swap { display: grid; width: 100%; padding: 8px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.sticker-swap img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; transform: rotate(8deg); transition: transform .3s ease; }
+.sticker-swap:hover img, .sticker-swap:focus-visible img { transform: rotate(-7deg) scale(1.04); }
+.sticker-swap:active img { transform: rotate(0) scale(.94); }
+.sticker-swap > span { font: 9px var(--mono); line-height: 1.6; margin-top: 16px; }
+.sticker-announcement { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.sticker-collage { min-width: 0; border-top: 1px solid; border-bottom: 1px solid; padding-block: 16px; }
+.sticker-collage-head, .sticker-collage-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; font: 10px var(--mono); line-height: 1.6; }
+.sticker-collage-head p { margin: 0; }
+.sticker-collage-head > button { min-height: 44px; border: 0; border-bottom: 1px solid; padding: 8px 0; color: var(--ink); background: transparent; font: inherit; cursor: pointer; }
+.sticker-collage-head > button:hover { color: var(--accent); }
+.sticker-rail { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 28px 16px; gap: 8px; }
+.sticker-slot { display: grid; place-items: center; min-width: 0; aspect-ratio: 1; }
+.collage-sticker { display: block; position: relative; width: 80%; aspect-ratio: 1; background: none; border: 0; padding: 0; cursor: grab; user-select: none; }
+.collage-sticker:active { cursor: grabbing; z-index: 1; }
+.collage-sticker img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.sticker-collage-foot { font-size: 9px; }
+@media (max-width: 800px) {
+  .hero-sticker { grid-column: 2; grid-row: 1; max-width: 112px; }
+  .sticker-swap { padding: 3px; }
+  .sticker-swap > span { font-size: 8px; margin-top: 8px; }
+  .sticker-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 20px 8px; gap: 8px; }
+  .collage-sticker { cursor: pointer; }
+}
+@media (max-width: 420px) {
+  .hero .hero-aside { grid-template-columns: minmax(0, 1fr) 88px; gap: 16px; }
+  .sticker-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sticker-slot:last-child { grid-column: 1 / -1; width: 50%; justify-self: center; }
+  .sticker-collage-head { align-items: flex-start; }
+  .sticker-collage-head p { max-width: 12ch; padding-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticker-swap img, .sticker-swap:hover img, .sticker-swap:focus-visible img, .sticker-swap:active img { transition: none; transform: none; }
+}

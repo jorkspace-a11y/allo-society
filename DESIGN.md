@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Draft
-- Last refreshed: 2026-10-23
+- Last refreshed: 2026-10-30
 - Primary product surfaces: Allo Assistant landing page prototype
 - Evidence reviewed: `Allo_Society_Website_Master_Brief.md`; `Allo.Society Brand Identity System.zip`; Warhol Arts, amo.co, Oddly Made, Readymag Ancient Artifacts, and Yaara Israeli references; real project content and imagery from the What Matters Built portfolio
 
@@ -41,6 +41,7 @@
 - Motion: Native cursor, restrained entrance motion, hard project transitions, desktop lateral row movement, and full-screen case-study takeovers. Desktop choreography responds to viewport changes and reduced-motion preferences.
 - Logo source: `F:\Allo Society Brand Kit\02 Vector Outlines\allo-society-logo-white.svg`, copied unchanged as `public/brand/allo-header-outlined.svg`. Use the supplied stacked white mark in a 126x56 frame on the 88px dark header. Outlined lettering prevents font fallback. Favicon comes from `05 Favicons\original-website-favicon-outlined.svg`, not a new symbol.
 - Imagery/iconography: Documentary-style portraits and simple diagram marks
+- Sticker layer: Ten owner-supplied retro cutouts, optimized as transparent WebP. A tap-to-swap hero sticker replaces the decorative orbit; a two-set collage in About supports keyboard/tap rotation and bounded desktop dragging. Keep stickers in allocated space, away from copy and contact controls. Official logo and favicon remain unchanged. Source mapping is in `public/stickers/README.md`.
 
 ## Components
 - Existing components to reuse: None
@@ -57,7 +58,7 @@
 
 ## Responsive behavior
 - Supported viewport QA: 320, 360, 390, 430, 768, 1024, 1280, 1366, 1440, 1920, 2560 and 3440 CSS pixels, plus transition-width and short-height checks.
-- Layout adaptations: Content rails cap at 1600px; hero headline and description occupy separate grid areas. Support cards retain three columns on desktop and stack with two-line names on phones. Work cards become a normal-flow grid below 1051px. Decorative orbit is omitted on the smallest phones.
+- Layout adaptations: Content rails cap at 1600px; hero headline and description occupy separate grid areas. Support cards retain three columns on desktop and stack with two-line names on phones. Work cards become a normal-flow grid below 1051px. Hero sticker uses a compact separate column on phones; the About collage reflows to three or two columns.
 - Touch/hover differences: Support model titles are native selection buttons; hover, focus and tap reveal the red selected state and relevant starting guidance. Contact links remain separate. RUN/GROW/BUILD supports arrow, Home and End keys. Mobile navigation traps keyboard focus and closes with Escape.
 
 ## Interaction states
