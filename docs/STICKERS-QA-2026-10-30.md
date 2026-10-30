@@ -19,4 +19,10 @@ Ten supplied cutouts, not newly generated artwork. Header logo and favicon, serv
 - Local Lighthouse checks: accessibility 100, best practices 100, basic SEO 100. Performance and search visibility were not remeasured for this increment.
 - Visually inspected desktop/mobile hero and collage screenshots in `output/playwright/stickers-*.png`.
 
-Coverage is Chromium with emulated viewport/touch/reduced motion, not physical-device or Safari/Firefox certification. Deployment verification is recorded below after publication.
+Coverage is Chromium with emulated viewport/touch/reduced motion, not physical-device or Safari/Firefox certification.
+
+## Live release
+
+Published source commit `98b2004`; Pages commit `f4d5c896f1302b82aa47194c95fe91922c588b10` confirmed built. Public HTML serves expected `index-Bp2uKTvy.js` and `index-BrcPKUOi.css` assets.
+
+Repeated the full 12-width sticker matrix on the public URL: no horizontal overflow or sticker/hero-copy overlap. Live keyboard activation, focus retention, Remix, bounded desktop drag, touch activation and mobile scroll policy pass, with zero captured JavaScript errors. All ten public sticker URLs return 200 with `image/webp`. Live mobile hero and desktop collage screenshots were visually inspected (`output/playwright/live-stickers-*.png`). The pre-existing 48 interaction/reflow checks for service tabs, support cards, navigation, case studies and non-JavaScript links also passed locally after integration.
